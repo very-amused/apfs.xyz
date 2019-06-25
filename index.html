@@ -4,9 +4,10 @@
 	<title>Amused's Personal File Server</title>
 	<meta charset="UTF-8">
 <link rel="stylesheet" href="./style.css">
+<script src="scripts/featuredLink.js"></script>
 </head>
 
-<body>
+<body onload="featuredLink()">
 
 <nav id="navbar">
 	<a class="nav-item" href="https://apfs.xyz/">Home</a>
@@ -17,12 +18,12 @@
 <div class="title">
 	<h1 class="title">Apfs.xyz</h1>
 	<div class="title-buttons">
-		<a class="title-button" style="margin-right: 2.3rem;" href="https://github.com/amused-af">
+		<a class="title-button" style="margin-right: 2.3rem;" href="https://github.com/very-amused">
 			<img class="title-button" src="img/GitHub-Mark-64px.png">
-			<span class="title-button">amused-af</span>
+			<span class="title-button">very-amused</span>
 		</a>
-		<a class="title-button" style="margin-left: 2.3rem;" href="#site_contents">
-			<span class="title-button">Site Contents</span>
+		<a class="title-button" id="featured-link" style="margin-left: 2.3rem;" href="#site_contents">
+			<span class="title-button" id="featured-title">Site Contents</span>
 		</a>
 	</div>
 </div>
