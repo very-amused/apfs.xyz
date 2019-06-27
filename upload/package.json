@@ -1,0 +1,16 @@
+{
+  "name": "upload",
+  "version": "1.0.0",
+  "description": "Upload page for apfs.xyz",
+  "main": "upload.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "express.js": "^1.0.0",
+    "multer": "^1.4.1",
+    "pug": "^2.0.4"
+  }
+}

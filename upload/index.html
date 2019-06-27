@@ -1,3 +1,10 @@
+<html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Amused's Personal File Server - Upload</title>
+	<meta charset="UTF-8">
+<link rel="stylesheet" href="https://apfs.xyz/style.css">
+<style>
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,800i%27');
 body {
     background-color: #0080FF;
@@ -55,7 +62,7 @@ body {
     -webkit-transform: scaleX(1);
 }
 
-/* Centered title and buttons */
+/* Centered upload form */
 div.main {
     height: 100%;
     width: 100%;
@@ -68,31 +75,37 @@ h1.title {
     font-family: 'Open Sans';
     font-weight: 800;
     font-style: italic;
-    font-size: 5.25rem;
-    margin-top: -5.25rem;
+    font-size: 4rem;
+    margin-top: 4rem;
 }
-div.title-buttons {
-    display: flex;
-    justify-content: center;
-}
-a.title-button {
-	background-color: #003366;
-	color: white;
-	text-decoration: none;
-    border-radius: 1rem;
-    border-style: solid;
-    border-width: 1.25rem;
-    border-color: #003366;
-    display: flex;
-	align-items: center;
-}
-img.title-button {
-    width: 3.8rem;
-    height: auto;
-}
-span.title-button {
+p.upload-form {
     font-family: 'Open Sans';
     font-weight: 400;
-    font-size: 2rem;
-    margin-left: 0.625rem;
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
 }
+input {
+    width: 50rem;
+    height: 2rem;
+    margin-bottom: 1rem;
+}
+</style>
+</head>
+
+<nav id="navbar">
+	<a class="nav-item" href="https://apfs.xyz/">Home</a>
+	<a class="nav-item" href="https://apfs.xyz/upload">Upload</a>
+	<a class="nav-item nav-item-right">Login</a>
+</nav>
+
+<div class="main">
+    <h1 class="title">Upload files here! (max size 50MB)</h1>
+    <form class="upload-form" action="/" method="POST" enctype="multipart/form-data">
+        <p class="upload-form">Select a file:</p>
+        <input type="file" name="file">
+        <br>
+        <input type="submit" value="Upload">
+    </form>
+</div>
+
+</html>
