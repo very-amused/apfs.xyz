@@ -20,6 +20,6 @@ function featuredPage() {
     elements.featuredLink = document.getElementById('featured-link');
 
     // Set the content to the random subpage
-    elements.featuredTitle.innerHTML = link.title;
+    elements.featuredTitle.innerHTML = `Random page: ${link.title}`;
     elements.featuredLink.href = link.url;
 }
