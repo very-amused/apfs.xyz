@@ -6,6 +6,8 @@ body {
     margin: 0;
     color: white;
 }
+
+/* Navigation bar */
 #navbar {
     position: absolute;
     box-sizing: border-box;
@@ -52,6 +54,8 @@ body {
     transform: scaleX(1);
     -webkit-transform: scaleX(1);
 }
+
+/* Centered title and buttons */
 div.title {
     height: 100%;
     width: 100%;
