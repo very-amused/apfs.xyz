@@ -7,7 +7,7 @@ const port = 3000;
 // Initialize Multer
 const multer = require('multer')
 const storage = multer.diskStorage({
-    destination: '/var/www/apfs.xyz/upload/uploads',
+    destination: '/var/www/cdn.apfs.xyz/uploads',
     filename: (req, file, callback) => {
         callback(null, genFilename(file.originalname));
     }
@@ -33,7 +33,7 @@ function genFilename(filename) {
     // Generate a unique ID that isn't already taken
     const fs = require('fs');
     let IDs = [];
-    fs.readdirSync('/var/www/apfs.xyz/upload/uploads').forEach(file => {
+    fs.readdirSync('/var/www/cdn.apfs.xyz/uploads').forEach(file => {
         if (file.startsWith(filename)) {
             let ID = file.split('-').pop();
             IDs.push(parseInt(ID));
