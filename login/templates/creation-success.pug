@@ -1,8 +1,8 @@
-<html lang="en">
-<head>
-    <title>Amused's Personal File Server - Create Account</title>
-    <meta charset="UTF-8">
-    <style>
+html(lang="en")
+head
+    title Amused's Personal File Server - Create Account
+    meta(charset="UTF-8")
+    style.
         @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,800i%27');
         body {
             background-color: #19E68C;
@@ -60,7 +60,7 @@
             -webkit-transform: scaleX(1);
         }
 
-        /* Account creation form */
+        /* Success message */
         div.main {
             height: 100%;
             width: 100%;
@@ -76,55 +76,19 @@
             font-size: 4rem;
             margin-top: 4rem;
         }
-        form.account-creation-form {
-            background-color: rgba(171, 183, 183, 0.7);
-            padding: 2rem;
+        p.success-message {
+            font-size: 1.5rem;
+            width: 50rem;
         }
-        p.account-creation-form {
-            font-family: 'Open Sans';
-            font-weight: 400;
-            font-size: 1.25rem;
-        }
-        input {
-            width: 20rem;
-            font-size: 1.25rem;
-        }
-        #submit {
-            margin-top: 1.5rem;
-        }
-    </style>
-    <script>
-        function verifyPassword() {
-                let password = document.getElementById('password').value;
-                let confirmPassword = document.getElementById('confirmPassword').value;
-                if (password !== confirmPassword) {
-                    alert('Passwords do not match!');
-                }
-            }
-    </script>
-</head>
 
-<body>
-
-<nav id="navbar">
-    <a class="nav-item" href="https://apfs.xyz/">Home</a>
-    <a class="nav-item" href="https://apfs.xyz/upload">Upload</a>
-    <a class="nav-item nav-item-right">Login</a>
-</nav> 
- 
-<div class="main">
-    <h1 class="title">Create an account:</h1>
-    <form class="account-creation-form" action="/create-account" onsubmit=verifyPassword() method="POST">
-        <p class="account-creation-form">E-mail:</p>
-        <input type="email" name="email">
-        <p class="account-creation-form">Password:</p>
-        <input type="password" name="password" id="password">
-        <p class="account-creation-form">Confirm password:</p>
-        <input type="password" name="confirmPassword" id="confirmPassword">
-        <br>
-        <input type="submit" value="submit" id="submit">
-    </form>
-</div>
-
-</body>
-</html>
+body
+    nav(id="navbar")
+            a(class="nav-item" href="https://apfs.xyz") Home
+            a(class="nav-item" href="https://apfs.xyz") Upload
+            a(class="nav-item nav-item-right") Login
+    
+    div(class="main")
+        h1(class="title") Success!
+        p(class="success-message").
+            Your account was successfully created. A confirmation email has been sent to #{email},
+            you'll be able to log in after confirming your account.

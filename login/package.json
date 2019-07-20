@@ -9,6 +9,7 @@
   "author": "",
   "license": "UNLICENSED",
   "dependencies": {
+    "bcrypt": "^3.0.6",
     "express.js": "^1.0.0",
     "mariadb": "^2.0.5",
     "pug": "^2.0.4"
