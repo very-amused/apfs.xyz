@@ -12,6 +12,7 @@
     "bcrypt": "^3.0.6",
     "express.js": "^1.0.0",
     "mariadb": "^2.0.5",
+    "nodemailer": "^6.3.0",
     "pug": "^2.0.4"
   }
 }
