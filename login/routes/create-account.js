@@ -33,7 +33,6 @@ async function selectAsArray(column, table, conn) {
 
 async function main(pool, email, password) {
     let conn = await pool.getConnection();
-    console.log(`Connected, the connection ID is ${conn.threadId}`);
 
     // Throw an error if the user already exists
     let users = await selectAsArray('Email', 'Users', conn);
@@ -71,6 +70,39 @@ async function main(pool, email, password) {
     // Insert the info into the Tokens table
     conn.query('INSERT INTO Tokens (ID, Token) VALUES (?, ?)',
     [ID, token]);
+
+    return {
+        ID: ID,
+        token: token
+    };
+}
+
+function sendVerificationEmail(ID, token, email) {
+    const nodemailer = require('nodemailer');
+    const transporter = nodemailer.createTransport({
+        host: 'smtp.migadu.com',
+        port: 587,
+        auth: {
+            user: 'noreply@accounts.apfs.xyz',
+            pass: process.env.MIGADU_PASS
+        }
+    });
+
+    // Verify the transporter connection, and log the error if it fails
+    transporter.verify((err) => {
+        if (err) {
+            console.log(`Error connecting to the Migadu transporter: ${err}`);
+        }
+    });
+
+    // Send the verification email
+    transporter.sendMail({
+        from: 'noreply@accounts.apfs.xyz',
+        to: email,
+        subject: 'Verify apfs account',
+        text: `Follow this link to verify your account:
+        https://apfs.xyz/API/verify-account/${ID}?token=${token}`
+    });
 }
 
 router.get('/', (req, res) => {
@@ -85,7 +117,10 @@ router.post('/', (req, res) => {
 
     // Insert user info into the db
     main(req.app.get('pool'), req.body.email, req.body.password)
-    .then(() => {
+    .then((user) => {
+        // Send the user a verification email
+        sendVerificationEmail(user.ID, user.token, req.body.email);
+        // Render success template
         res.render('creation-success', {email: req.body.email});
     },
     (err) => {
