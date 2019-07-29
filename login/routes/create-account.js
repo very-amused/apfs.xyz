@@ -1,11 +1,11 @@
 // Initialize Express Router
 const router = require('express').Router();
 
-// Function to generate a random 6-digit User ID
+// Function to generate a random 10-digit User ID
 async function genID() {
     let range = [...Array(10).keys()];
     let ID = '';
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 10; i++) {
         ID += range[Math.floor(Math.random() * range.length)];
     }
     return ID;

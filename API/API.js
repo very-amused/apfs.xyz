@@ -6,10 +6,9 @@ const port = 3002;
 // Initialize MariaDB
 const mariadb = require('mariadb');
 const pool = mariadb.createPool({
-    host: '208.167.233.12',
-    user: 'testing',
+    user: 'admin',
     password: process.env.MARIADB_PASS, // $MARIADB_PASS environment variable
-    database: 'apfs_testing'
+    database: 'apfs'
 });
 app.locals.pool = pool; // Store the pool variable in the app object
 
