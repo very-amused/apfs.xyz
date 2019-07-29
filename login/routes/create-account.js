@@ -42,10 +42,6 @@ async function sendVerificationEmail(ID, token, email) {
         }
     });
 
-    // Verify the transporter connection, and log the error if it fails
-    let verification = await transporter.verify();
-    console.log(verification);
-
     // Send the verification email
     transporter.sendMail({
         from: 'noreply@accounts.apfs.xyz',
@@ -53,10 +49,6 @@ async function sendVerificationEmail(ID, token, email) {
         subject: 'Verify apfs account',
         text: `Follow this link to verify your account:
         https://apfs.xyz/API/verify-account/${ID}?token=${token}`
-    }, (err) => {
-        if (err) {
-            throw err;
-        }
     });
 }
 
@@ -101,10 +93,7 @@ async function main(pool, email, password) {
     [ID, token]);
 
     // Send the user a verification email
-    sendVerificationEmail(ID, token, email)
-    .catch((err) => {
-        throw err;
-    });
+    sendVerificationEmail(ID, token, email);
 }
 
 router.get('/', (req, res) => {
