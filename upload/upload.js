@@ -1,11 +1,11 @@
 // Initialize Express
 const express = require('express');
 const app = express();
-app.set('view engine', 'pug') // Use pug to render templates
+app.set('view engine', 'pug'); // Use pug to render templates
 const port = 3000;
 
 // Initialize Multer
-const multer = require('multer')
+const multer = require('multer');
 const storage = multer.diskStorage({
     destination: '/var/www/cdn.apfs.xyz/uploads',
     filename: (req, file, callback) => {
@@ -70,4 +70,4 @@ app.post('/upload', (req, res) => {
     });
 });
 
-app.listen(port, () => console.log(`Listening on port ${port}.`));
+app.listen(port, () => console.log(`Listening on port ${port}.`)); // eslint-disable-line no-console

@@ -62,7 +62,7 @@ async function main(pool, email, password) {
     let tokens = await selectAsArray('Token', 'Tokens', conn);
     
     // Generate a unique confirmation token for the new user
-    token = await genToken();
+    let token = await genToken();
     while (token in tokens) {
         token = await genToken();
     }

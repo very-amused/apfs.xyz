@@ -16,4 +16,4 @@ app.locals.pool = pool; // Store the pool variable in the app object
 const verifyAccount = require('./routes/verify-account');
 app.use('/API/verify-account', verifyAccount);
 
-app.listen(port, () => console.log(`Listening on port ${port}.`));
+app.listen(port, () => console.log(`Listening on port ${port}.`)); // eslint-disable-line no-console

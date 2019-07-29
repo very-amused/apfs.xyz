@@ -2,7 +2,6 @@
 const router = require('express').Router();
 
 router.get('/', (req, res) => {
-    console.log(req.query);
     if (req.query.success === 'true') {
         res.sendFile('account-verified.html', {root: './html'});
     }
