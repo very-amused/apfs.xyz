@@ -31,6 +31,35 @@ async function selectAsArray(column, table, conn) {
     return dataArray;
 }
 
+async function sendVerificationEmail(ID, token, email) {
+    const nodemailer = require('nodemailer');
+    const transporter = nodemailer.createTransport({
+        host: 'smtp.migadu.com',
+        port: 587,
+        auth: {
+            user: 'noreply@accounts.apfs.xyz',
+            pass: process.env.MIGADU_PASS
+        }
+    });
+
+    // Verify the transporter connection, and log the error if it fails
+    let verification = await transporter.verify();
+    console.log(verification);
+
+    // Send the verification email
+    transporter.sendMail({
+        from: 'noreply@accounts.apfs.xyz',
+        to: email,
+        subject: 'Verify apfs account',
+        text: `Follow this link to verify your account:
+        https://apfs.xyz/API/verify-account/${ID}?token=${token}`
+    }, (err) => {
+        if (err) {
+            throw err;
+        }
+    });
+}
+
 async function main(pool, email, password) {
     let conn = await pool.getConnection();
 
@@ -71,37 +100,10 @@ async function main(pool, email, password) {
     conn.query('INSERT INTO Tokens (ID, Token) VALUES (?, ?)',
     [ID, token]);
 
-    return {
-        ID: ID,
-        token: token
-    };
-}
-
-function sendVerificationEmail(ID, token, email) {
-    const nodemailer = require('nodemailer');
-    const transporter = nodemailer.createTransport({
-        host: 'smtp.migadu.com',
-        port: 587,
-        auth: {
-            user: 'noreply@accounts.apfs.xyz',
-            pass: process.env.MIGADU_PASS
-        }
-    });
-
-    // Verify the transporter connection, and log the error if it fails
-    transporter.verify((err) => {
-        if (err) {
-            console.log(`Error connecting to the Migadu transporter: ${err}`);
-        }
-    });
-
-    // Send the verification email
-    transporter.sendMail({
-        from: 'noreply@accounts.apfs.xyz',
-        to: email,
-        subject: 'Verify apfs account',
-        text: `Follow this link to verify your account:
-        https://apfs.xyz/API/verify-account/${ID}?token=${token}`
+    // Send the user a verification email
+    sendVerificationEmail(ID, token, email)
+    .catch((err) => {
+        throw err;
     });
 }
 
@@ -117,11 +119,8 @@ router.post('/', (req, res) => {
 
     // Insert user info into the db
     main(req.app.get('pool'), req.body.email, req.body.password)
-    .then((user) => {
-        // Send the user a verification email
-        sendVerificationEmail(user.ID, user.token, req.body.email);
-        // Render success template
-        res.render('creation-success', {email: req.body.email});
+    .then(() => {
+        res.render('creation-success', {email: req.body.email}); // Render success template
     },
     (err) => {
         res.render('creation-error', {err: err}); // Render error page if an error occurs
