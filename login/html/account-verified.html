@@ -1,0 +1,116 @@
+<html lang="en">
+<head>
+    <title>Amused's Personal File Server - Account Verified</title>
+    <meta charset="UTF-8">
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,800i%27');
+        body {
+            background-color: #19E68C;
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 300;
+            margin: 0;
+            color: white;
+        }
+
+        /* Navigation bar */
+        #navbar {
+            position: absolute;
+            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            width: 100%;
+            background-color: #003366;
+            height: 4rem;
+            display: flex;
+            align-items: center;
+            border-style: solid;
+            border-width: 0.3rem;
+            border-color: #707070;
+        }
+        .nav-item {
+            margin-left: 1.75rem;
+            font-size: 1.25rem;
+            position: relative;
+            color: white;
+            text-decoration: none;
+        }
+        .nav-item-right {
+            margin-left: auto;
+            margin-right: 1.75em;
+        }
+        .nav-item:hover {
+            color: white;
+        }
+        .nav-item:before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 0.05rem;
+            bottom: 0;
+            left: 0;
+            background-color: white;
+            visibility: hidden;
+            transform: scaleX(0);
+            -webkit-transform: scaleX(0);
+            transition: all 0.2s ease-in-out 0s;
+            -webkit-transition: all 0.2s ease-in-out 0s;
+        }
+        .nav-item:hover:before {
+            visibility: visible;
+            transform: scaleX(1);
+            -webkit-transform: scaleX(1);
+        }
+
+        /* Verification success message */
+        div.main {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        h1.title {
+            font-family: 'Open Sans';
+            font-weight: 800;
+            font-style: italic;
+            font-size: 4rem;
+            margin-top: 4rem;
+            color: #008000;
+        }
+        p#description {
+            font-size: 1.5rem;
+            width: 50rem;
+        }
+    </style>
+    <script>
+        function elipseAnimation() {
+            let message = `Your account has successfully been verified,
+            you will soon be able to log in at <a href="/accounts/login">here</a>.
+            Your device will be redirected to the login page automatically after 10 seconds`;
+            let i = 0;
+            document.getElementById('description').innerHTML = message;
+            let elipses;
+            setInterval(function () {
+                elipses = "   ...".slice(i%6, i%6+3).trim();
+                i === 6 ? (i = 0) : i++;
+                document.getElementById('description').innerHTML = message + elipses;
+            }, 500);
+        }
+    </script>
+</head>
+
+<body onload="elipseAnimation()">
+
+<nav id="navbar">
+    <a class="nav-item" href="https://apfs.xyz/">Home</a>
+    <a class="nav-item" href="https://apfs.xyz/upload">Upload</a>
+    <a class="nav-item nav-item-right">Login</a>
+</nav>
+
+<div class="main">
+    <h1 class="title">Account verified!</h1>
+    <p id="description"></p>
+</div>
+
+</body>
+</html>

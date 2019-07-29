@@ -38,8 +38,8 @@ async function main(pool, email, password) {
     // Throw an error if the user already exists
     let users = await selectAsArray('Email', 'Users', conn);
     if (users.includes(email)) {
-        throw `A user with the email address of ${email} already exists.`;
-    } // Error for if the user already exists and has been confirmed (isn't in the tokens table)
+        throw `A user with the email address of ${email} already exists`;
+    }
 
     // Query ID column for currently existing IDs
     let IDs = await selectAsArray('ID', 'Users', conn);
@@ -69,8 +69,8 @@ async function main(pool, email, password) {
     }
 
     // Insert the info into the Tokens table
-    conn.query('INSERT INTO Tokens (Email, Token) VALUES (?, ?)',
-    [email, token]);
+    conn.query('INSERT INTO Tokens (ID, Token) VALUES (?, ?)',
+    [ID, token]);
 }
 
 router.get('/', (req, res) => {
@@ -80,19 +80,17 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
     // Reload the page if the passwords don't match
     if (req.body.password !== req.body.confirmPassword) {
-        res.redirect('/create-account');
+        res.redirect('/accounts/create-account');
     }
 
     // Insert user info into the db
     main(req.app.get('pool'), req.body.email, req.body.password)
-    .catch(err => {
-        if (err) {
-            res.render('creation-error', {err: err}); // Render error page if an error occurs
-        }
-        else {
-            res.render('creation-success', {email: req.body.email});
-        }
-    }); 
+    .then(() => {
+        res.render('creation-success', {email: req.body.email});
+    },
+    (err) => {
+        res.render('creation-error', {err: err}); // Render error page if an error occurs
+    });
 });
 
 module.exports = router;

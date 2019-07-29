@@ -18,6 +18,9 @@ const pool = mariadb.createPool({
 app.set('pool', pool); // Store the pool variable in the app object
 
 const createAccount = require('./routes/create-account');
-app.use('/create-account', createAccount);
+app.use('/accounts/create-account', createAccount);
+
+const accountVerified = require('./routes/account-verified');
+app.use('/accounts/account-verified', accountVerified);
 
 app.listen(port, () => console.log(`Listening on port ${port}.`));
