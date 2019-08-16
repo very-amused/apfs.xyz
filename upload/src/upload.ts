@@ -1,12 +1,12 @@
 // Initialize Express
 import express = require('express');
-const app = express();
+const app: express.Application = express();
 app.set('view engine', 'pug'); // Use pug to render templates
-const port = 3000;
+const port: number = 3000;
 
 // Initialize Multer
 import multer = require('multer');
-const storage = multer.diskStorage({
+const storage: multer.StorageEngine = multer.diskStorage({
     destination: './uploads',
     filename: (req, file, callback) => {
         callback(null, genFilename(file.originalname));
@@ -22,7 +22,7 @@ const upload = multer({
 function genFilename(filename: string) {
     // Remove and store the file extension
     const filenameParts: string[] = filename.split('.');
-    const extension = filenameParts.pop();
+    const extension: string = filenameParts.pop()!;
     filename = filenameParts.join('');
 
     // Sanitize the filename
