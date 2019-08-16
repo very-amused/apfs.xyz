@@ -8,10 +8,10 @@
 		"ecmaVersion": 2017
 	},
 	"rules": {
-    "brace-style": ["error", "stroustrup", { "allowSingleLine": true }],
-	"no-var": 2,
-	"no-console": 1,
-	"quotes": ["error", "single"],
-	"semi": 2
+		"brace-style": ["error", "stroustrup", { "allowSingleLine": true }],
+		"no-var": 2,
+		"no-console": 1,
+		"quotes": ["error", "single"],
+		"semi": 2
 	}
 }

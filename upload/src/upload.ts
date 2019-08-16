@@ -1,13 +1,13 @@
 // Initialize Express
-const express = require('express');
+import express = require('express');
 const app = express();
 app.set('view engine', 'pug'); // Use pug to render templates
 const port = 3000;
 
 // Initialize Multer
-const multer = require('multer');
+import multer = require('multer');
 const storage = multer.diskStorage({
-    destination: '/var/www/cdn.apfs.xyz/uploads',
+    destination: './uploads',
     filename: (req, file, callback) => {
         callback(null, genFilename(file.originalname));
     }
@@ -19,11 +19,11 @@ const upload = multer({
 .single('file');
 
 // Function for generating filenames
-function genFilename(filename) {
+function genFilename(filename: string) {
     // Remove and store the file extension
-    filename = filename.split('.');
-    let extension = filename.pop();
-    filename = filename.join('');
+    const filenameParts: string[] = filename.split('.');
+    const extension = filenameParts.pop();
+    filename = filenameParts.join('');
 
     // Sanitize the filename
     filename = filename
@@ -32,21 +32,22 @@ function genFilename(filename) {
 
     // Generate a unique ID that isn't already taken
     const fs = require('fs');
-    let IDs = [];
-    fs.readdirSync('/var/www/cdn.apfs.xyz/uploads').forEach(file => {
+    let IDs: string[] = [];
+    const files: string[] = fs.readdirSync('./uploads')
+    files.forEach(file => {
         if (file.startsWith(filename)) {
-            let ID = file.split('-').pop();
-            IDs.push(parseInt(ID));
+            let ID: string = file.split('-').pop()!;
+            IDs.push(ID);
         }
     });
-    let fileID;
+    let fileID: string;
     if (!IDs.length) {
         fileID = '00000'; // Set the ID to 00000 if no files exist with the same name
     }
     else {
-        let highestID = Math.max(...IDs);
-        fileID = highestID + 1; // Set the ID to 1 higher than the highest ID of a file with the same name
-        fileID = fileID.toString().padStart(5, '0');
+        let highestID: number = Math.max(...IDs.map(ID => parseInt(ID)));
+        fileID = (highestID + 1).toString(); // Set the ID to 1 higher than the highest ID of a file with the same name
+        fileID = fileID.padStart(5, '0');
     }
 
     // Return the finished filename
@@ -55,7 +56,7 @@ function genFilename(filename) {
 
 
 app.get('/upload', (req, res) => {
-    res.sendFile(`${__dirname}/index.html`);
+    res.sendFile(`${__dirname}/public/index.html`);
 });
 
 app.post('/upload', (req, res) => {
