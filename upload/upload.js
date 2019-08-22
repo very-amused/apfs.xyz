@@ -32,11 +32,11 @@ function genFilename(filename) {
 
     // Generate a unique ID that isn't already taken
     const fs = require('fs');
-    let IDs = [];
+    const IDs = [];
     fs.readdirSync('/var/www/cdn.apfs.xyz/uploads').forEach(file => {
         if (file.startsWith(filename)) {
             let ID = file.split('-').pop();
-            IDs.push(parseInt(ID));
+            IDs.push(ID);
         }
     });
     let fileID;
@@ -44,7 +44,7 @@ function genFilename(filename) {
         fileID = '00000'; // Set the ID to 00000 if no files exist with the same name
     }
     else {
-        let highestID = Math.max(...IDs);
+        let highestID = Math.max(...IDs.map(ID => parseInt(ID)));
         fileID = highestID + 1; // Set the ID to 1 higher than the highest ID of a file with the same name
         fileID = fileID.toString().padStart(5, '0');
     }
