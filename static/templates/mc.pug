@@ -1,13 +1,13 @@
 doctype html
 html(lang="en")
 head
-    title Amused's Personal File Server
+    title APFS - Minecraft Server
     meta(charset="UTF-8")
     //- Adapt page content to viewport
     meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
     //- Include Bootstrap and custom css
     link(rel="stylesheet" href="/css/bootstrap.min.css")
-    link(rel="stylesheet" href="/css/home.css")
+    link(rel="stylesheet" href="/css/mc.css")
     //- Include Bootstrap bundle (which also includes popper.js) and JQuery slim
     script(src="/js/jquery.slim.min.js")
     script(src="/js/bootstrap.bundle.min.js")
@@ -24,22 +24,24 @@ nav(class="navbar navbar-expand navbar-dark bg-dark")
   //- Left aligned items
   div(class="navbar-nav mr-auto")
     a(class="nav-item nav-link" href="/upload") Upload
-    a(class="nav-item nav-link" href="/mc") MC Server
+    a(class="nav-item nav-link active" href="/mc") MC Server
     a(class="nav-item nav-link" href="https://github.com/very-amused") My GitHub 
     a(class="nav-item nav-link disabled") About
   //- Right aligned items
   div(class="navbar-nav ml-auto")
     //- Dropdown menu
     div(class="nav-item dropdown")
-      button(class="btn btn-outline-success dropdown-toggle" type="button" id="accountsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Accounts
-      div(class="dropdown-menu dropdown-menu-right" aria-labelledby="accountsDropdown")
+      button(class="btn btn-outline-success dropdown-toggle" type="button" id="accountsDropdown" data-toggle="dropdown") Accounts
+      div(class="dropdown-menu dropdown-menu-right")
         a(class="dropdown-item" href="/accounts/create-account") Create an account
         a(class="dropdown-item disabled" href="/accounts/login") Login
 
 //- Container div with horizontally centered content
 div(class="container d-flex justify-content-center align-items-center flex-column")
-  //- Jumbotron welcome message
   div(class="jumbotron bg-primary")
-    h1(class="display-4") Welcome to Amused's Personal File Server
-  //- Cover Image
-  img(class="d-block img-fluid" src="/img/cover.png" alt="Cover Image")
+    h1 My Minecraft Server
+    p I run a minecraft server, and it's yours as much as it is mine. It currently has a robust multiverse system (multiple worlds) and big plans for a bunch of fun worlds in the future. We already have a survival world, with plans for two more on the way. Open to anyone interested, just join using the IP <code class="text-white">mc.apfs.xyz</code>
+    | If you aren't convinced yet, have a look at some screenshots below...
+  //- Todo: create a carousel with multiple screenshots,slide indicators, and controls
+  img(class="img-fluid" src="/img/mc/screenshot_1.png" height="600" width="800" style="margin-top: -4rem;")
+  p(style="margin-top: 2rem;") NOTE: If you have any ideas for this server (or just general feedback or constructive criticism), feel free to let me know at <a href="mailto:amused@apfs.xyz" class="text-light">amused@apfs.xyz</a>

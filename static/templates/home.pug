@@ -1,0 +1,45 @@
+doctype html
+html(lang="en")
+head
+    title Amused's Personal File Server
+    meta(charset="UTF-8")
+    //- Adapt page content to viewport
+    meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
+    //- Include Bootstrap and custom css
+    link(rel="stylesheet" href="/css/bootstrap.min.css")
+    link(rel="stylesheet" href="/css/home.css")
+    //- Include Bootstrap bundle (which also includes popper.js) and JQuery slim
+    script(src="/js/jquery.slim.min.js")
+    script(src="/js/bootstrap.bundle.min.js")
+    //- Favicon
+    link(rel="shortcut icon" type="image/png" href="/img/favicon.png")
+
+body(class="bg-primary")
+
+//- Navigation bar
+nav(class="navbar navbar-expand navbar-dark bg-dark")
+  //- Navbar icon
+  a(class="navbar-brand" href="/")
+    img(src="/img/favicon.png" width="38" height="38")
+  //- Left aligned items
+  div(class="navbar-nav mr-auto")
+    a(class="nav-item nav-link" href="/upload") Upload
+    a(class="nav-item nav-link" href="/mc") MC Server
+    a(class="nav-item nav-link" href="https://github.com/very-amused") My GitHub 
+    a(class="nav-item nav-link disabled") About
+  //- Right aligned items
+  div(class="navbar-nav ml-auto")
+    //- Dropdown menu
+    div(class="nav-item dropdown")
+      button(class="btn btn-outline-success dropdown-toggle" type="button" id="accountsDropdown" data-toggle="dropdown") Accounts
+      div(class="dropdown-menu dropdown-menu-right")
+        a(class="dropdown-item" href="/accounts/create-account") Create an account
+        a(class="dropdown-item disabled" href="/accounts/login") Login
+
+//- Container div with horizontally centered content
+div(class="container d-flex justify-content-center align-items-center flex-column")
+  //- Jumbotron welcome message
+  div(class="jumbotron bg-primary")
+    h1(class="display-4") Welcome to Amused's Personal File Server
+  //- Cover Image
+  img(class="d-block img-fluid" src="/img/cover.png" alt="Cover Image")

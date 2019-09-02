@@ -15,6 +15,11 @@ app.get('/', (req, res) => {
     res.render('home');
 });
 
+// Render the Minecraft page
+app.get('/mc', (req, res) => {
+    res.render('mc');
+});
+
 app.listen(port, () => {
     // eslint-disable-next-line no-console
     console.log(`Listening on port ${port}`);
