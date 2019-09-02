@@ -1,0 +1,15 @@
+{
+  "name": "apfs-bootstrap",
+  "version": "1.0.0",
+  "description": "Homepage rewrite for apfs.xyz",
+  "main": "home.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pug": "^2.0.4"
+  }
+}
