@@ -5,7 +5,7 @@ const port = 3002;
 
 // Initialize MariaDB
 const mariadb = require('mariadb');
-const dbConfig = require('../dbConfig');
+const dbConfig = require('../internal/dbConfig');
 const pool = mariadb.createPool(dbConfig);
 app.locals.pool = pool; // Store the pool variable in the app object
 

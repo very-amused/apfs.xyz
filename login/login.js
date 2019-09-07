@@ -9,7 +9,7 @@ app.use(express.urlencoded({extended: false}));
 
 // Configure and initialize MariaDB
 const mariadb = require('mariadb');
-const dbConfig = require('../dbConfig');
+const dbConfig = require('../internal/dbConfig');
 const pool = mariadb.createPool(dbConfig);
 app.set('pool', pool); // Store the pool variable in the app object
 
