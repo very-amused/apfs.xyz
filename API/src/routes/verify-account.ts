@@ -1,17 +1,18 @@
 // Initialize Express Router
-const router = require('express').Router();
+import * as express from 'express';
+const router = express.Router();
 
 // Function to select a column from an SQL table and convert it to an array
-async function selectAsArray(column, table, conn) {
+async function selectAsArray(column: string, table: string, conn: any) {
     const sqlColumn = await conn.query(`SELECT ${column} FROM ${table}`);
-    const dataArray = [];
-    sqlColumn.forEach(object => {
+    const dataArray: any[] = [];
+    sqlColumn.forEach((object: any) => {
         dataArray.push(object[column]);
     }); // A forEach loop is used to convert the sql column to an array
     return dataArray;
 }
 
-async function main(pool, userID, token) {
+async function main(pool: any, userID: string, token: string) {
     const conn = await pool.getConnection();
 
     // Throw error if there is no token supplied
@@ -26,9 +27,9 @@ async function main(pool, userID, token) {
     }
 
     // Throw an error if the token supplied as a query string is invalid
-    let validToken = await conn.query('SELECT Token FROM Tokens WHERE ID = ?',
+    const validTokenData = await conn.query('SELECT Token FROM Tokens WHERE ID = ?',
     [userID]);
-    validToken = validToken[0].Token;
+    const validToken: string = validTokenData[0].Token;
     if (token !== validToken) {
         throw 'Authentication failure due to an invalid token.';
     }
@@ -55,4 +56,4 @@ router.get('/:userID', (req, res) => {
     });
 });
 
-module.exports = router;
+export default router;

@@ -1,11 +1,14 @@
 // Initialize Express
-const express = require('express');
+import express = require('express');
 const app = express();
 app.set('view engine', 'pug'); // Use pug to render templates
 const port = 3000;
 
+// Import the node fs module for scanning directories
+import fs = require('fs');
+
 // Initialize Multer
-const multer = require('multer');
+import multer = require('multer');
 const storage = multer.diskStorage({
     destination: '/var/www/cdn.apfs.xyz/uploads',
     filename: (req, file, callback) => {
@@ -15,15 +18,14 @@ const storage = multer.diskStorage({
 const upload = multer({
     storage: storage,
     limits: {fileSize: 50 * 1000 * 1000} // 50MB size limit
-})
-.single('file');
+}).single('file');
 
 // Function for generating filenames
-function genFilename(filename) {
+function genFilename(filename: string) {
     // Remove and store the file extension
-    filename = filename.split('.');
-    const extension = filename.pop();
-    filename = filename.join('');
+    const filenameParts = filename.split('.');
+    const extension = filenameParts.pop();
+    filename = filenameParts[0];
 
     // Sanitize the filename
     filename = filename
@@ -31,12 +33,11 @@ function genFilename(filename) {
     .replace(/_{2,}/g, '_'); // Replace all groups of 2 or more underscores with a single underscore
 
     // Generate a unique ID that isn't already taken
-    const fs = require('fs');
-    const IDs = [];
+    const IDs: string[] = [];
     fs.readdirSync('/var/www/cdn.apfs.xyz/uploads').forEach(file => {
         if (file.startsWith(filename)) {
             const ID = file.split('-').pop();
-            IDs.push(ID);
+            IDs.push(ID!);
         }
     });
     let fileID;
@@ -54,9 +55,8 @@ function genFilename(filename) {
 }
 
 
-app.get('/upload', (req, res) => {
-    res.sendFile(`${__dirname}/index.html`);
-});
+// Statically host the html homepage
+app.use('/upload', express.static('public'));
 
 app.post('/upload', (req, res) => {
     upload(req, res, err => {

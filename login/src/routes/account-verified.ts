@@ -1,9 +1,10 @@
 // Initialize Express Router
-const router = require('express').Router();
+import * as express from 'express';
+const router = express.Router();
 
 router.get('/', (req, res) => {
     if (req.query.success === 'true') {
-        res.sendFile('account-verified.html', {root: './html'});
+        res.sendFile('account-verified.html', {root: '../public'});
     }
     else {
         res.status(403);
@@ -11,4 +12,4 @@ router.get('/', (req, res) => {
     }
 });
 
-module.exports = router;
+export default router;

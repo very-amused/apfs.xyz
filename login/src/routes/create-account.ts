@@ -1,5 +1,9 @@
 // Initialize Express Router
-const router = require('express').Router();
+import * as express from 'express';
+const router = express.Router();
+
+// Import bcrypt for hashing
+import * as bcrypt from 'bcrypt';
 
 // Function to generate a random 10-digit User ID
 async function genID() {
@@ -22,16 +26,16 @@ async function genToken() {
 }
 
 // Function to select a column from an SQL table and convert it to an array
-async function selectAsArray(column, table, conn) {
+async function selectAsArray(column: string, table: string, conn: any) {
     const sqlColumn = await conn.query(`SELECT ${column} FROM ${table}`);
-    const dataArray = [];
-    sqlColumn.forEach(object => {
+    const dataArray: any[] = [];
+    sqlColumn.forEach((object: any) => {
         dataArray.push(object[column]);
     }); // A forEach loop is used to convert the sql column to an array
     return dataArray;
 }
 
-async function sendVerificationEmail(ID, token, email) {
+async function sendVerificationEmail(ID: string, token: string, email: string) {
     const nodemailer = require('nodemailer');
     const transporter = nodemailer.createTransport({
         host: 'smtp.migadu.com',
@@ -52,7 +56,7 @@ async function sendVerificationEmail(ID, token, email) {
     });
 }
 
-async function main(pool, email, password) {
+async function main(pool: any, email: string, password: string) {
     const conn = await pool.getConnection();
 
     // Throw an error if the user already exists
@@ -71,7 +75,6 @@ async function main(pool, email, password) {
     }
 
     // Hash the password using bcrypt
-    const bcrypt = require('bcrypt');
     // Generates a 10-round salt and hashes the password in one function call
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -97,7 +100,7 @@ async function main(pool, email, password) {
 }
 
 router.get('/', (req, res) => {
-    res.sendFile('create-account.html', {root: './html'});
+    res.sendFile('create-account.html', {root: '../public'});
 });
 
 router.post('/', (req, res) => {
@@ -116,4 +119,4 @@ router.post('/', (req, res) => {
     });
 });
 
-module.exports = router;
+export default router;
