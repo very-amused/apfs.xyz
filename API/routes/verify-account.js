@@ -3,8 +3,8 @@ const router = require('express').Router();
 
 // Function to select a column from an SQL table and convert it to an array
 async function selectAsArray(column, table, conn) {
-    let sqlColumn = await conn.query(`SELECT ${column} FROM ${table}`);
-    let dataArray = [];
+    const sqlColumn = await conn.query(`SELECT ${column} FROM ${table}`);
+    const dataArray = [];
     sqlColumn.forEach(object => {
         dataArray.push(object[column]);
     }); // A forEach loop is used to convert the sql column to an array
@@ -12,7 +12,7 @@ async function selectAsArray(column, table, conn) {
 }
 
 async function main(pool, userID, token) {
-    let conn = await pool.getConnection();
+    const conn = await pool.getConnection();
 
     // Throw error if there is no token supplied
     if (!token) {
@@ -20,7 +20,7 @@ async function main(pool, userID, token) {
     }
 
     // Throw an error if the user ID doesn't belong to a user awaiting verification
-    let userIDs = await selectAsArray('ID', 'Tokens', conn);
+    const userIDs = await selectAsArray('ID', 'Tokens', conn);
     if (!userIDs.includes(userID)) {
         throw `${userID} is not the ID of a user awaiting verification.`;
     }
@@ -29,7 +29,6 @@ async function main(pool, userID, token) {
     let validToken = await conn.query('SELECT Token FROM Tokens WHERE ID = ?',
     [userID]);
     validToken = validToken[0].Token;
-    console.log(validToken);
     if (token !== validToken) {
         throw 'Authentication failure due to an invalid token.';
     }

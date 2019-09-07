@@ -3,7 +3,7 @@ const router = require('express').Router();
 
 // Function to generate a random 10-digit User ID
 async function genID() {
-    let range = [...Array(10).keys()];
+    const range = [...Array(10).keys()];
     let ID = '';
     for (let i = 0; i < 10; i++) {
         ID += range[Math.floor(Math.random() * range.length)];
@@ -13,7 +13,7 @@ async function genID() {
 
 // Function to generate a random 20-character token
 async function genToken() {
-    let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'.split('');
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'.split('');
     let token = '';
     for (let i = 0; i < 20; i++) {
         token += chars[Math.floor(Math.random() * chars.length)];
@@ -23,8 +23,8 @@ async function genToken() {
 
 // Function to select a column from an SQL table and convert it to an array
 async function selectAsArray(column, table, conn) {
-    let sqlColumn = await conn.query(`SELECT ${column} FROM ${table}`);
-    let dataArray = [];
+    const sqlColumn = await conn.query(`SELECT ${column} FROM ${table}`);
+    const dataArray = [];
     sqlColumn.forEach(object => {
         dataArray.push(object[column]);
     }); // A forEach loop is used to convert the sql column to an array
@@ -53,16 +53,16 @@ async function sendVerificationEmail(ID, token, email) {
 }
 
 async function main(pool, email, password) {
-    let conn = await pool.getConnection();
+    const conn = await pool.getConnection();
 
     // Throw an error if the user already exists
-    let users = await selectAsArray('Email', 'Users', conn);
+    const users = await selectAsArray('Email', 'Users', conn);
     if (users.includes(email)) {
         throw `A user with the email address of ${email} already exists`;
     }
 
     // Query ID column for currently existing IDs
-    let IDs = await selectAsArray('ID', 'Users', conn);
+    const IDs = await selectAsArray('ID', 'Users', conn);
 
     // Generate a random, unique ID
     let ID = await genID();
@@ -73,14 +73,14 @@ async function main(pool, email, password) {
     // Hash the password using bcrypt
     const bcrypt = require('bcrypt');
     // Generates a 10-round salt and hashes the password in one function call
-    let hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     // Insert the info into the Users table
     conn.query('INSERT INTO Users (ID, Email, Password) VALUES (?, ?, ?)',
     [ID, email, hashedPassword]);
 
     // Query Token column for currently existing tokens
-    let tokens = await selectAsArray('Token', 'Tokens', conn);
+    const tokens = await selectAsArray('Token', 'Tokens', conn);
     
     // Generate a unique confirmation token for the new user
     let token = await genToken();

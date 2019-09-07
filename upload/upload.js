@@ -22,7 +22,7 @@ const upload = multer({
 function genFilename(filename) {
     // Remove and store the file extension
     filename = filename.split('.');
-    let extension = filename.pop();
+    const extension = filename.pop();
     filename = filename.join('');
 
     // Sanitize the filename
@@ -35,7 +35,7 @@ function genFilename(filename) {
     const IDs = [];
     fs.readdirSync('/var/www/cdn.apfs.xyz/uploads').forEach(file => {
         if (file.startsWith(filename)) {
-            let ID = file.split('-').pop();
+            const ID = file.split('-').pop();
             IDs.push(ID);
         }
     });
@@ -44,7 +44,7 @@ function genFilename(filename) {
         fileID = '00000'; // Set the ID to 00000 if no files exist with the same name
     }
     else {
-        let highestID = Math.max(...IDs.map(ID => parseInt(ID)));
+        const highestID = Math.max(...IDs.map(ID => parseInt(ID)));
         fileID = highestID + 1; // Set the ID to 1 higher than the highest ID of a file with the same name
         fileID = fileID.toString().padStart(5, '0');
     }

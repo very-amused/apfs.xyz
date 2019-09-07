@@ -22,4 +22,5 @@ app.use('/accounts/create-account', createAccount);
 const accountVerified = require('./routes/account-verified');
 app.use('/accounts/account-verified', accountVerified);
 
-app.listen(port, () => console.log(`Listening on port ${port}.`)); // eslint-disable-line no-console
+// eslint-disable-next-line no-console
+app.listen(port, () => console.log(`Listening on port ${port}.`));
