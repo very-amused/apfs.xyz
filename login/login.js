@@ -7,13 +7,10 @@ const port = 3001;
 // Parse form data
 app.use(express.urlencoded({extended: false}));
 
-// Initialize MariaDB
+// Configure and initialize MariaDB
 const mariadb = require('mariadb');
-const pool = mariadb.createPool({
-    user: 'admin',
-    password: process.env.MARIADB_PASS, // $MARIADB_PASS environment variable
-    database: 'apfs'
-});
+const dbConfig = require('../dbConfig');
+const pool = mariadb.createPool(dbConfig);
 app.set('pool', pool); // Store the pool variable in the app object
 
 const createAccount = require('./routes/create-account');
