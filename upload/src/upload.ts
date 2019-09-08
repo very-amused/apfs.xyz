@@ -2,6 +2,7 @@
 import express = require('express');
 const app = express();
 app.set('view engine', 'pug'); // Use pug to render templates
+app.set('views', '../templates');
 const port = 3000;
 
 // Import the node fs module for scanning directories
@@ -62,10 +63,10 @@ app.post('/upload', (req, res) => {
     upload(req, res, err => {
         // Handle error or success using pug templates
         if (err) {
-            res.render(`${__dirname}/templates/error.pug`, {err: err});
+            res.render('error', {err: err});
         }
         else {
-            res.render(`${__dirname}/templates/success.pug`, {filename_: req.file.filename});
+            res.render('success', {filename_: req.file.filename});
         }
     });
 });
