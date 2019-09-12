@@ -56,8 +56,10 @@ function genFilename(filename: string) {
 }
 
 
-// Statically host the html homepage
-app.use('/upload', express.static('../public'));
+// Render the upload page template
+app.get('/upload', (req, res) => {
+    res.render('upload');
+})
 
 app.post('/upload', (req, res) => {
     upload(req, res, err => {
