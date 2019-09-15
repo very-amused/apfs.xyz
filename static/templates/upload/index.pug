@@ -19,7 +19,7 @@ body(class="bg-primary")
 nav(class="navbar navbar-expand navbar-dark bg-dark")
   //- Navbar icon
   a(class="navbar-brand" href="/")
-    img(src="/favicon.png" width="38" height="38")
+    img(src="/img/favicon.png" width="38" height="38")
   //- Left aligned items
   div(class="navbar-nav mr-auto")
     a(class="nav-item nav-link active" href="/upload") Upload
@@ -45,6 +45,6 @@ div(class="container d-flex justify-content-center align-items-center flex-colum
       //- Label is styled as a button and made clickable to select a file
       label(for="fileUpload" class="btn btn-lg btn-dark") Select a file
       //- Input is hidden behind the label
-      input(class="custom-file-input" id="fileUpload" class="bg-light" action="/API/upload" method="post" enctype="multipart/form-data" type="file")
+      input(class="custom-file-input" id="fileUpload" class="bg-light" action="/API/upload" method="POST" enctype="multipart/form-data" type="file")
       //- Submit button
       input(class="btn btn-sm btn-dark" type="submit" value="Upload")

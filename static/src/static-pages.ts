@@ -14,7 +14,8 @@ app.get('/', (req, res) => {
     res.render(`${__dirname}/../templates/home`);
 });
 
-// Render each index.pug
+
+// Render each directory's index.pug tempalte
 import * as fs from 'fs';
 fs.readdir('../templates', (err, files) => {
     files.forEach(page => {
@@ -22,7 +23,7 @@ fs.readdir('../templates', (err, files) => {
         if (!fs.lstatSync(path).isDirectory()) {
             return;
         }
-        app.get(`/pages/${page}`, (req, res) => {
+        app.get(`/${page}`, (req, res) => {
             res.render(`${path}/index`);
         });
     });

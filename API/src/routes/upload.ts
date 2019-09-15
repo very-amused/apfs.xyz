@@ -2,7 +2,7 @@
 import * as express from 'express';
 const app = express();
 app.set('view engine', 'pug');
-app.set('views', '../../upload/templates');
+app.set('views', '../../static/templates/upload');
 
 // Import the node fs module for scanning directories
 import fs = require('fs');
