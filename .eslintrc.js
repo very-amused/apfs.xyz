@@ -8,7 +8,7 @@ module.exports = {
 	'plugins': ['@typescript-eslint'],
 	'extends': [
 		'eslint:recommended',
-		'plugin:@typescript-eslint/eslint-recommended',
+		'plugin:@typescript-eslint/eslint-recommended'
 	],
 	// Support new ECMA features and specifications
 	'parserOptions': {

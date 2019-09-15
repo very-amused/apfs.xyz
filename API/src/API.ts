@@ -8,8 +8,18 @@ import * as mariadb from 'mariadb';
 const dbConfig = require('../../internal/dbConfig');
 const pool = mariadb.createPool(dbConfig);
 app.locals.pool = pool; // Store the pool variable in the app object
-import verifyAccount from './routes/verify-account';
-app.use('/API/verify-account', verifyAccount);
+
+// Import routes/subapps
+import * as fs from 'fs';
+fs.readdir('./routes', (err, routes) => {
+    routes.forEach(file => {
+        const routeName = file.split('.')[0];
+        const route = require(`./routes/${routeName}`);
+        // eslint-disable-next-line no-console
+        console.log(`API Route ${routeName} is going up`);
+        app.use(`/API/${routeName}`, route);
+    });
+});
 
 // eslint-disable-next-line no-console
 app.listen(port, () => console.log(`Listening on port ${port}.`));

@@ -56,4 +56,4 @@ router.get('/:userID', (req, res) => {
     });
 });
 
-export default router;
+module.exports = router;
