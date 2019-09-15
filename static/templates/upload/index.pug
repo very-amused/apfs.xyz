@@ -40,11 +40,11 @@ div(class="container d-flex justify-content-center align-items-center flex-colum
   //- Upload header
   div(class="jumbotron bg-primary")
     h1 Upload Files Here
-  form
+  form(action="/API/upload" method="POST" enctype="multipart/form-data")
     div(class="form-group d-flex justify-content-center flex-column")
       //- Label is styled as a button and made clickable to select a file
       label(for="fileUpload" class="btn btn-lg btn-dark") Select a file
       //- Input is hidden behind the label
-      input(class="custom-file-input" id="fileUpload" class="bg-light" action="/API/upload" method="POST" enctype="multipart/form-data" type="file")
+      input(class="custom-file-input" id="fileUpload" type="file" name="file")
       //- Submit button
       input(class="btn btn-sm btn-dark" type="submit" value="Upload")
