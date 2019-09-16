@@ -37,10 +37,29 @@ nav(class="navbar navbar-expand navbar-dark bg-dark")
 
 //- Container div with horizontally centered content
 div(class="container d-flex justify-content-center align-items-center flex-column")
-  div(class="jumbotron bg-primary")
-    h1 My Minecraft Server
-    p I run a minecraft server, and it's yours as much as it is mine. It currently has a robust multiverse system (multiple worlds) and big plans for a bunch of fun worlds in the future. We already have a survival world, with plans for two more on the way. Open to anyone interested, just join using the IP <code class="text-white">mc.apfs.xyz</code>
-    | If you aren't convinced yet, have a look at some screenshots below...
-  //- Todo: create a carousel with multiple screenshots,slide indicators, and controls
-  img(class="img-fluid" src="/img/mc/screenshot_1.png" height="600" width="800" style="margin-top: -4rem;")
+  h3 My Minecraft Server
+  p I run a minecraft server, and it's yours as much as it is mine. It currently has a robust multiverse system (multiple worlds) and big plans for a bunch of fun worlds in the future. We already have a survival world, with plans for two more on the way. Open to anyone interested, just join using the IP <code class="text-white">mc.apfs.xyz</code>
+  | If you aren't convinced yet, have a look at some screenshots...
+  //- Carousel of MC Screenshots
+  div(class="carousel slide" id="screenshotCarousel")
+    div(class="carousel-inner")
+      //- Iteration for screenshots 1-13
+      each val in [...Array(13).keys()].map(i => i + 1)
+        if val === 1
+          div(class="carousel-item active")
+            img(class="d-block img-fluid" src="/img/mc/screenshot_" + val + ".png")
+        else
+          div(class="carousel-item")
+            img(class="d-block img-fluid" src="/img/mc/screenshot_" + val + ".png")
+    //- Carousel controls
+    a(class="carousel-control-prev" href="#screenshotCarousel" role="button" data-slide="prev")
+      span(class="carousel-control-prev-icon")
+    a(class="carousel-control-next" href="#screenshotCarousel" role="button" data-slide="next")
+      span(class="carousel-control-next-icon")
+  //- Start the carousel with a 3 second time between changing slides
+  script.
+    $('.carousel').carousel({
+      interval: 3000
+    });
+  
   p(style="margin-top: 2rem;") NOTE: If you have any ideas for this server (or just general feedback or constructive criticism), feel free to let me know at <a href="mailto:amused@apfs.xyz" class="text-light">amused@apfs.xyz</a>
