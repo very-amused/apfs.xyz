@@ -1,15 +1,17 @@
 doctype html
 html(lang="en")
 head
-    title Amused's Personal File Server
+    title APFS - Minecraft Server
     meta(charset="UTF-8")
     //- Adapt page content to viewport
     meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
-    //- Include Bootstrap and custom css
+    //- Include Bootstrap
     link(rel="stylesheet" href="/css/bootstrap.min.css")
     //- Include Bootstrap bundle (which also includes popper.js) and JQuery slim
     script(src="/js/jquery.slim.min.js")
     script(src="/js/bootstrap.bundle.min.js")
+    //- Script for verifying password
+    script(src="/js/verifyPassword.js")
     //- Favicon
     link(rel="shortcut icon" type="image/png" href="/img/favicon.png")
 
@@ -23,7 +25,7 @@ nav(class="navbar navbar-expand navbar-dark bg-dark")
   //- Left aligned items
   div(class="navbar-nav mr-auto")
     a(class="nav-item nav-link" href="/upload") Upload
-    a(class="nav-item nav-link" href="/mc") MC Server
+    a(class="nav-item nav-link active" href="/mc") MC Server
     a(class="nav-item nav-link" href="https://github.com/very-amused") My GitHub 
     a(class="nav-item nav-link disabled") About
   //- Right aligned items
@@ -32,13 +34,29 @@ nav(class="navbar navbar-expand navbar-dark bg-dark")
     div(class="nav-item dropdown")
       button(class="btn btn-outline-success dropdown-toggle" type="button" id="accountsDropdown" data-toggle="dropdown") Accounts
       div(class="dropdown-menu dropdown-menu-right")
-        a(class="dropdown-item" href="/create-account") Create an account
+        a(class="dropdown-item" href="/accounts/create-account") Create an account
         a(class="dropdown-item disabled" href="/accounts/login") Login
 
 //- Container div with horizontally centered content
-div(class="container d-flex justify-content-center align-items-center flex-column")
-  //- Jumbotron welcome message
+div(class="container d-flex align-items-center flex-column")
   div(class="jumbotron bg-primary")
-    h1(class="display-4") Welcome to Amused's Personal File Server
-  //- Cover Image
-  img(class="d-block img-fluid" src="/img/cover.png" alt="Cover Image")
+    h1 Create an Account
+  //- Alert (hidden by default)
+  div(class="alert alert-danger d-none" role="alert")
+    span Passwords do not match!
+    //- X button to close alert
+    button(class="close ml-2" data-dismiss="alert" type="button")
+      span &times;
+  //- Account creation form
+  form(class="d-flex align-items-center flex-column" action="/API/create-account" onsubmit="return verifyPassword()" method="POST")
+    div(class="form-group")
+      label(for="email") Email address:
+      input(class="form-control" id="email" type="email")
+    div(class="form-group")
+      label(for="password") Password:
+      input(class="form-control" id="password" type="password")
+    div(class="form-group")
+      label(for="confirm-password") Confirm password:
+      input(class="form-control" id="confirm-password" type="password")
+    button(type="submit" class="btn btn-success") Submit
+    //- TODO: Add information about what accounts can be used for to the right of the creation form

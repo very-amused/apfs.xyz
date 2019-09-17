@@ -3,6 +3,10 @@ import * as express from 'express';
 const app = express();
 const port = 3002;
 
+// Configure Express for rendering pug templates
+app.set('view engine', 'pug');
+app.set('views', '../../static/templates/upload');
+
 // Configure and initialize MariaDB
 import * as mariadb from 'mariadb';
 const dbConfig = require('../../internal/dbConfig');

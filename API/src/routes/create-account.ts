@@ -97,20 +97,14 @@ async function main(pool: any, email: string, password: string) {
 
     // Send the user a verification email
     sendVerificationEmail(ID, token, email);
+    
+    // Close the db connection
+    conn.end();
 }
 
-router.get('/', (req, res) => {
-    res.sendFile('create-account.html', {root: '../public'});
-});
-
 router.post('/', (req, res) => {
-    // Reload the page if the passwords don't match
-    if (req.body.password !== req.body.confirmPassword) {
-        res.redirect('/accounts/create-account');
-    }
-
     // Insert user info into the db
-    main(req.app.get('pool'), req.body.email, req.body.password)
+    main(req.app.locals.pool, req.body.email, req.body.password)
     .then(() => {
         res.render('creation-success', {email: req.body.email}); // Render success template
     },
@@ -119,4 +113,4 @@ router.post('/', (req, res) => {
     });
 });
 
-export default router;
+module.exports = router;

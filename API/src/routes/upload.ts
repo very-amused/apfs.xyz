@@ -1,8 +1,6 @@
 // Initialize Express
 import * as express from 'express';
-const app = express();
-app.set('view engine', 'pug');
-app.set('views', '../../static/templates/upload');
+const router = express.Router();
 
 // Import the node fs module for scanning directories
 import fs = require('fs');
@@ -69,9 +67,9 @@ const upload = multer({
 }).single('file');
 
 // Parse urlencoded HTTP form data
-app.use(express.urlencoded({extended: false}));
+router.use(express.urlencoded({extended: false}));
 
-app.post('/', (req, res) => {
+router.post('/', (req, res) => {
     upload(req, res, err => {
         // Handle error or success using pug templates
         if (err) {
@@ -83,4 +81,4 @@ app.post('/', (req, res) => {
     });
 });
 
-module.exports = app;
+module.exports = router;
