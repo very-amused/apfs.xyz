@@ -34,13 +34,13 @@ nav(class="navbar navbar-expand navbar-dark bg-dark")
     div(class="nav-item dropdown")
       button(class="btn btn-outline-success dropdown-toggle" type="button" id="accountsDropdown" data-toggle="dropdown") Accounts
       div(class="dropdown-menu dropdown-menu-right")
-        a(class="dropdown-item" href="/accounts/create-account") Create an account
-        a(class="dropdown-item disabled" href="/accounts/login") Login
+        a(class="dropdown-item" href="/create-account") Create an account
+        a(class="dropdown-item disabled" href="/login") Login
 
 //- Container div with horizontally centered content
 div(class="container d-flex align-items-center flex-column")
   div(class="jumbotron bg-primary")
-    h1 Create an Account
+    h1(class="display-4") Create an Account
   //- Alert (hidden by default)
   div(class="alert alert-danger d-none" role="alert")
     span Passwords do not match!
