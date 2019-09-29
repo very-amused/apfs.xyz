@@ -38,7 +38,6 @@ async function selectAsArray(column: string, table: string, conn: any) {
 }
 
 import * as nodemailer from 'nodemailer';
-import { promises } from 'dns';
 async function sendVerificationEmail(ID: string, token: string, email: string) {
     const transporter = nodemailer.createTransport({
         host: 'smtp.migadu.com',
