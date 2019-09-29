@@ -10,12 +10,10 @@ head
     //- Include Bootstrap bundle (which also includes popper.js) and JQuery slim
     script(src="/js/jquery.slim.min.js")
     script(src="/js/bootstrap.bundle.min.js")
-    //- Script for verifying password
-    script(src="/js/verifyPassword.js")
     //- Favicon
     link(rel="shortcut icon" type="image/png" href="/img/favicon.png")
 
-body(class="bg-primary")
+body(class="bg-light")
 
 //- Navigation bar
 nav(class="navbar navbar-expand navbar-dark bg-dark")
@@ -38,25 +36,6 @@ nav(class="navbar navbar-expand navbar-dark bg-dark")
         a(class="dropdown-item disabled" href="/login") Login
 
 //- Container div with horizontally centered content
-div(class="container d-flex align-items-center flex-column")
-  div(class="jumbotron bg-primary")
-    h1(class="display-4") Create an Account
-  //- Alert (hidden by default)
-  div(class="alert alert-danger d-none" role="alert")
-    span Passwords do not match!
-    //- X button to close alert
-    button(class="close ml-2" data-dismiss="alert" type="button")
-      span &times;
-  //- Account creation form
-  form(class="d-flex align-items-center flex-column" action="/API/create-account" onsubmit="return verifyPassword()" method="POST")
-    div(class="form-group")
-      label(for="email") Email address:
-      input(class="form-control" id="email" type="email")
-    div(class="form-group")
-      label(for="password") Password:
-      input(class="form-control" id="password" type="password")
-    div(class="form-group")
-      label(for="confirm-password") Confirm password:
-      input(class="form-control" id="confirm-password" type="password")
-    button(type="submit" class="btn btn-success") Submit
-    //- TODO: Add information about what accounts can be used for to the right of the creation form
+div(class="container d-flex align-items-center flex-column jumbotron bg-light")
+  h1(class="display-4 bg-light text-success") Success!
+  p(class="h5 mt-2") Your account has been created and is currently awaiting email verification. An email has been sent to <code>#{email}</code>, use it to verify your account (don't forget to check your spam folder.)

@@ -1,6 +1,8 @@
 // Initialize Express Router
 import * as express from 'express';
 const router = express.Router();
+// Parse urlencoded web form data
+router.use(express.urlencoded({extended: false}));
 
 // Import bcrypt for hashing
 import * as bcrypt from 'bcrypt';
@@ -35,8 +37,9 @@ async function selectAsArray(column: string, table: string, conn: any) {
     return dataArray;
 }
 
+import * as nodemailer from 'nodemailer';
+import { promises } from 'dns';
 async function sendVerificationEmail(ID: string, token: string, email: string) {
-    const nodemailer = require('nodemailer');
     const transporter = nodemailer.createTransport({
         host: 'smtp.migadu.com',
         port: 587,
@@ -97,7 +100,7 @@ async function main(pool: any, email: string, password: string) {
 
     // Send the user a verification email
     sendVerificationEmail(ID, token, email);
-    
+
     // Close the db connection
     conn.end();
 }
@@ -106,10 +109,10 @@ router.post('/', (req, res) => {
     // Insert user info into the db
     main(req.app.locals.pool, req.body.email, req.body.password)
     .then(() => {
-        res.render('creation-success', {email: req.body.email}); // Render success template
+        res.render('accounts/create-account/success', {email: req.body.email}); // Render success template
     },
     (err) => {
-        res.render('creation-error', {err: err}); // Render error page if an error occurs
+        res.render('accounts/create-account/error', {err: err}); // Render error page if an error occurs
     });
 });
 

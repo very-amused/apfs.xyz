@@ -73,10 +73,10 @@ router.post('/', (req, res) => {
     upload(req, res, err => {
         // Handle error or success using pug templates
         if (err) {
-            res.render('error', {err: err});
+            res.render('upload/error', {err: err});
         }
         else {
-            res.render('success', {filename_: req.file.filename});
+            res.render('upload/success', {filename_: req.file.filename});
         }
     });
 });
