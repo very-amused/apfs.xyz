@@ -70,14 +70,11 @@ const upload = multer({
 router.use(express.urlencoded({extended: false}));
 
 router.post('/', (req, res) => {
-    upload(req, res, err => {
-        // Handle error or success using pug templates
-        if (err) {
-            res.render('upload/error', {err: err});
-        }
-        else {
-            res.render('upload/success', {filename_: req.file.filename});
-        }
+    upload(req, res, () => {
+        res.json({
+            success: true,
+            url: `https://cdn.apfs.xyz/${req.file.filename}`
+        });
     });
 });
 

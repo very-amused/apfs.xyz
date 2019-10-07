@@ -3,15 +3,14 @@ html(lang="en")
 include ./mixins/head.pug
 +head("Amused's Personal File Server")
 
-body(class="bg-primary")
+body(class="bg-light")
 
 include ./mixins/navbar.pug
 +navbar()
 
 //- Container div with horizontally centered content
-div(class="container d-flex justify-content-center align-items-center flex-column")
+div(class="container d-flex align-items-center flex-column")
   //- Jumbotron welcome message
-  div(class="jumbotron bg-primary")
-    h1(class="display-4") Welcome to Amused's Personal File Server
+  h1(class="mt-3 display-4") Welcome to Amused's Personal File Server
   //- Cover Image
-  img(class="d-block img-fluid" src="/img/cover.png" alt="Cover Image")
+  img(class="d-block" height="500" src="/img/cover_light.png" alt="Cover Image")

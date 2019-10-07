@@ -16,6 +16,12 @@ app.locals.pool = pool; // Store the pool variable in the app object
 // Make sure important environment variables are set
 require('../../internal/envCheck');
 
+// Configure CORS if in a development environment
+if (process.env.NODE_ENV === 'development') {
+    const cors = require('cors');
+    app.use(cors());
+}
+
 // Import routes/subapps
 import * as fs from 'fs';
 fs.readdir('./routes', (err, routes) => {

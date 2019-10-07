@@ -2,8 +2,7 @@ doctype html
 html(lang="en")
 include ../mixins/head.pug
 +head("APFS - Upload")
-
-body(class="bg-primary")
+body(class="bg-light")
 
 include ../mixins/navbar.pug
 +navbar("upload")
@@ -11,13 +10,20 @@ include ../mixins/navbar.pug
 //- Container div with horizontally centered content
 div(class="container d-flex justify-content-center align-items-center flex-column")
   //- Upload header
-  div(class="jumbotron bg-primary")
+  div(class="jumbotron bg-light")
     h1(class="display-4") Upload Files Here
-  form(action="/API/upload" method="POST" enctype="multipart/form-data")
+  form(id="uploadForm" action="http://localhost:3002/API/upload" method="POST" enctype="multipart/form-data")
     div(class="form-group d-flex justify-content-center flex-column")
       //- Label is styled as a button and made clickable to select a file
       label(for="fileUpload" class="btn btn-lg btn-dark") Select a file
       //- Input is hidden behind the label
       input(class="custom-file-input" id="fileUpload" type="file" name="file")
+      //- Progress bar
+      div(id="progressBarContainer" class="progress rounded-0 d-none")
+        div(id="progressBar" class="progress-bar progress-bar-striped bg-primary progress-bar-animated" role="progressbar")
       //- Submit button
       input(class="btn btn-sm btn-dark" type="submit" value="Upload")
+  p(id="successMessage" class="d-none")
+
+//- Import ajax upload function
+script(src="/js/upload.js")
