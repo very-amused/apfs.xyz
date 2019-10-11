@@ -1,9 +1,9 @@
 // Initialize Express
-import * as express from 'express';
-const router = express.Router();
+import {Router, urlencoded} from 'express';
+const router = Router();
 
 // Import the node fs module for scanning directories
-import fs = require('fs');
+import {readdirSync} from 'fs';
 
 // Function for generating filenames
 function genFilename(filename: string) {
@@ -19,7 +19,7 @@ function genFilename(filename: string) {
 
     // Generate a unique ID that isn't already taken
     const IDs: string[] = [];
-    fs.readdirSync(multerDestination).forEach(file => {
+    readdirSync(multerDestination).forEach(file => {
         if (file.startsWith(filename)) {
             const ID = file.split('-').pop();
             IDs.push(ID!);
@@ -67,13 +67,13 @@ const upload = multer({
 }).single('file');
 
 // Parse urlencoded HTTP form data
-router.use(express.urlencoded({extended: false}));
+router.use(urlencoded({extended: false}));
 
 router.post('/', (req, res) => {
     upload(req, res, () => {
         res.json({
             success: true,
-            url: `https://cdn.apfs.xyz/${req.file.filename}`
+            url: `https://cdn.apfs.xyz/uploads/${req.file.filename}`
         });
     });
 });

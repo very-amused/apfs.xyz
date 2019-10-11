@@ -9,19 +9,18 @@ form.onsubmit = () => {
     xhr.upload.addEventListener('loadstart', () => {
         $('#progressBarContainer').removeClass('d-none');
     });
+
     // Update progress bar width and percentage
     xhr.upload.addEventListener('progress', p => {
-        const percentage = Math.round((p.loaded / p.total) * 100);
-        progressBar.removeClass((i, className) => {
-             // Remove classname that starts with w- (which controls width)
-            return className.match(/w-\d*/g);
-        });
-        progressBar.addClass(`w-${percentage}`);
-        progressBar.text(`${percentage}%`);
-
+        const percentage = `${Math.round((p.loaded / p.total) * 100).toString()}%`;
+        progressBar.css('width', percentage);
+        progressBar.text(percentage);
     });
+
+    // POST the form to the url specified by its 'action' attribute
     xhr.open('POST', form.getAttribute('action'));
     xhr.responseType = 'json'; // Receive JSON response from the server
+
     // Function called when the upload finishes
     xhr.onloadend = () => {
         // Stop the progress bar animation and set its text to 'finished'
