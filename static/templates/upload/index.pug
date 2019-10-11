@@ -12,7 +12,7 @@ div(class="container d-flex justify-content-center align-items-center flex-colum
   //- Upload header
   div(class="jumbotron bg-light")
     h1(class="display-4") Upload Files Here
-  form(id="uploadForm" action="http://localhost:3002/API/upload" method="POST" enctype="multipart/form-data")
+  form(id="uploadForm" action="/API/upload" method="POST" enctype="multipart/form-data")
     div(class="form-group d-flex justify-content-center flex-column")
       //- Label is styled as a button and made clickable to select a file
       label(for="fileUpload" class="btn btn-lg btn-dark") Select a file
