@@ -72,8 +72,9 @@ router.use(urlencoded({extended: false}));
 router.post('/', (req, res) => {
     upload(req, res, (err) => {
         if (err) {
-            res.status(413).json({
-                success: false
+            res.status(500).json({
+                success: false,
+                error: err
             });
         }
         else {

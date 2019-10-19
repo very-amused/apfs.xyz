@@ -25,7 +25,10 @@ form.onsubmit = () => {
     xhr.onloadend = () => {
         // Check for errors
         if (xhr.status !== 200) {
-            alert(xhr.statusText ? `Error: ${xhr.statusText}` : 'An unspecified error has occured');
+            /* If the server sent back an error message, alert the client using that,
+            else check if the xhr has a status message. If neither messages are available, use a generic error message */
+            const error = xhr.response.error ? `Error: ${xhr.response.error}` : xhr.statusText ? xhr.statusText : 'An unspecified error has occured';
+            alert(error);
         }
 
         // Stop the progress bar animation and set its text to 'finished'
