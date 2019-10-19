@@ -36,4 +36,4 @@ form.onsubmit = () => {
 
     // Prevent the non-ajax fallback upload action from triggering
     return false;
-}
+};

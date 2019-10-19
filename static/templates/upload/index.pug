@@ -14,39 +14,36 @@ div(class="container d-flex align-items-center flex-column")
   //- Upload header
   h1(class="display-4 mt-3") Upload Files Here
   //- Box containing upload controls
-  div(class="container d-flex justify-content-center flex-row border rounded bg-light shadow" style="width: 75%; height: 30rem;")
+  div(class="container d-flex justify-content-center flex-row border rounded bg-light shadow mt-3" style="width: 90%; height: 35rem;")
     //- Subcontainer for upload controls
     div(class="container d-flex align-items-center flex-column w-50 border-right")
       //- Upload form
-      form(class="mt-5" id="uploadForm" action="/API/upload" method="POST" enctype="multipart/form-data")
+      form(id="uploadForm" class="mt-4" action="/API/upload" method="POST" enctype="multipart/form-data")
         div(class="form-group d-flex justify-content-center flex-column")
           //- Label is styled as a button and made clickable to select a file
           label(for="fileUpload" class="btn btn-success") Select a file
           //- Input is hidden behind the label
-          input(class="custom-file-input" id="fileUpload" type="file" name="file")
+          input(id="fileUpload" class="custom-file-input" type="file" name="file")
+          //- Display the filename
+          span(id="filename" class="d-none text-center")
           //- Progress bar
-          div(id="progressBarContainer" class="progress rounded-0 d-none")
-            div(id="progressBar" class="progress-bar progress-bar-striped bg-primary progress-bar-animated" role="progressbar")
+          div(id="progressBarContainer" class="progress d-none mb-2")
+            div(id="progressBar" class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar")
           //- Submit button
           input(class="btn btn-sm btn-success" type="submit" value="Upload")
     //- Subcontainer for info
-    div(class="container d-flex align-items-center flex-column w-50 border-left")
-      p Upload info goes here
+    div(class="container w-50 border-left")
+      p(class="text-break mt-4").
+        This upload page allows you to share files with friends, quickly transfer them between devices, or any other purposes that you can think of. Once a file is uploaded here, you'll be able to track the progress as it uploads, and when it finishes you'll be given a URL where your file can be reached from anywhere in the world.
+        <br><br>
+        Features coming to the upload page in the future include:
+        <ul class="text-info">
+        <li>The ability to upload files with a time limit for access before they'll be automatically deleted</li>
+        <li>The ability to upload files and encrypt them with a password.</li>
+        <li>The ability to upload files and encrypt them using your APFS account password (which is stored securely).</li>
+        </ul>
 
-//-    
-  //- Upload form
-  form(id="uploadForm" action="/API/upload" method="POST" enctype="multipart/form-data")
-    div(class="form-group d-flex justify-content-center flex-column")
-      //- Label is styled as a button and made clickable to select a file
-      label(for="fileUpload" class="btn btn-lg btn-dark") Select a file
-      //- Input is hidden behind the label
-      input(class="custom-file-input" id="fileUpload" type="file" name="file")
-      //- Progress bar
-      div(id="progressBarContainer" class="progress rounded-0 d-none")
-        div(id="progressBar" class="progress-bar progress-bar-striped bg-primary progress-bar-animated" role="progressbar")
-      //- Submit button
-      input(class="btn btn-sm btn-dark" type="submit" value="Upload")
-  p(id="successMessage" class="d-none")
-
+//- Import filename display function
+script(src="/js/displayFilename.js")
 //- Import ajax upload function
 script(src="/js/upload.js")
