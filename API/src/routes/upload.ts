@@ -70,11 +70,18 @@ const upload = multer({
 router.use(urlencoded({extended: false}));
 
 router.post('/', (req, res) => {
-    upload(req, res, () => {
-        res.status(200).json({
-            success: true,
-            url: `https://cdn.apfs.xyz/uploads/${req.file.filename}`
-        });
+    upload(req, res, (err) => {
+        if (err) {
+            res.status(413).json({
+                success: false
+            });
+        }
+        else {
+            res.status(200).json({
+                success: true,
+                url: `https://cdn.apfs.xyz/uploads/${req.file.filename}`
+            });
+        }
     });
 });
 
