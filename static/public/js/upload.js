@@ -23,6 +23,11 @@ form.onsubmit = () => {
 
     // Function called when the upload finishes
     xhr.onloadend = () => {
+        // Check for errors
+        if (xhr.status !== 200) {
+            alert(xhr.statusText ? `Error: ${xhr.statusText}` : 'An unspecified error has occured');
+        }
+
         // Stop the progress bar animation and set its text to 'finished'
         progressBar.removeClass('progress-bar-animated');
         progressBar.text('Upload complete');

@@ -71,7 +71,7 @@ router.use(urlencoded({extended: false}));
 
 router.post('/', (req, res) => {
     upload(req, res, () => {
-        res.json({
+        res.status(200).json({
             success: true,
             url: `https://cdn.apfs.xyz/uploads/${req.file.filename}`
         });
