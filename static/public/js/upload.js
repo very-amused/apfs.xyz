@@ -21,15 +21,25 @@ form.onsubmit = () => {
     xhr.open('POST', form.getAttribute('action'));
     xhr.responseType = 'json'; // Receive JSON response from the server
 
-    // Function called when the upload finishes
-    xhr.onloadend = () => {
-        // Check for errors
+    // Function to check for errors
+    function errorCheck() {
         if (xhr.status !== 200) {
             /* If the server sent back an error message, alert the client using that,
             else check if the xhr has a status message. If neither messages are available, use a generic error message */
             const error = xhr.response.error ? `Error: ${xhr.response.error}` : xhr.statusText ? xhr.statusText : 'An unspecified error has occured';
             alert(error);
         }
+    }
+
+    // Check for errors once response headers are available
+    xhr.onload = () => {
+        errorCheck();
+    };
+
+    // Function called when the upload finishes
+    xhr.onloadend = () => {
+        // Check for errors once again
+        errorCheck();
 
         // Stop the progress bar animation and set its text to 'finished'
         progressBar.removeClass('progress-bar-animated');
