@@ -13,19 +13,19 @@ include ../mixins/light/navbar.pug
 div(class="container d-flex align-items-center flex-column")
   //- Upload header
   h1(class="display-4 mt-3") Upload Files Here
-  //- Box containing upload controls
+  //- Box containing upload controls and info
   div(class="container d-flex justify-content-center flex-row border rounded bg-light shadow mt-3" style="width: 90%; height: 35rem;")
     //- Subcontainer for upload controls
     div(class="container d-flex align-items-center flex-column w-50 border-right")
       //- Upload form
-      form(id="uploadForm" class="mt-4" action="/API/upload" method="POST" enctype="multipart/form-data")
+      form(id="uploadForm" class="mt-4 w-75" action="/API/upload" method="POST" enctype="multipart/form-data")
         div(class="form-group d-flex justify-content-center flex-column")
           //- Label is styled as a button and made clickable to select a file
           label(for="fileUpload" class="btn btn-success") Select a file
           //- Input is hidden behind the label
           input(id="fileUpload" class="custom-file-input" type="file" name="file")
           //- Display the filename
-          span(id="filename" class="d-none text-center")
+          span(id="filename" class="d-none text-center text-break")
           //- Progress bar
           div(id="progressBarContainer" class="progress d-none mb-2")
             div(id="progressBar" class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar")
