@@ -5,15 +5,14 @@ include ../../mixins/head.pug
 //- Script for verifying password
 script(src="/js/verifyPassword.js")
 
-body(class="bg-primary")
+body(style="background-image: url(\"/img/light/bg.png\")")
 
-include ../../mixins/navbar.pug
+include ../../mixins/light/navbar.pug
 +navbar()
 
 //- Container div with horizontally centered content
 div(class="container d-flex align-items-center flex-column")
-  div(class="jumbotron bg-primary")
-    h1(class="display-4") Create an Account
+  h1(class="display-4 mt-3") Create an Account
   //- Alert (hidden by default)
   div(class="alert alert-danger d-none" role="alert")
     span Passwords do not match!
@@ -24,12 +23,13 @@ div(class="container d-flex align-items-center flex-column")
   form(class="d-flex align-items-center flex-column" action="/API/create-account" onsubmit="return verifyPassword()" method="POST")
     div(class="form-group")
       label(for="email") Email address:
-      input(class="form-control" id="email" type="email")
+      input(class="form-control" id="email" type="email" disabled)
     div(class="form-group")
       label(for="password") Password:
-      input(class="form-control" id="password" type="password")
+      input(class="form-control" id="password" type="password" disabled)
     div(class="form-group")
       label(for="confirm-password") Confirm password:
-      input(class="form-control" id="confirm-password" type="password")
-    button(type="submit" class="btn btn-success") Submit
+      input(class="form-control" id="confirm-password" type="password" disabled)
+    button(type="submit" class="btn btn-success" disabled) Submit
+    p(class="text-break") I apologize for any inconveniences, but at the moment account registration is currently down due to backend maintenance.
     //- TODO: Add information about what accounts can be used for to the right of the creation form
