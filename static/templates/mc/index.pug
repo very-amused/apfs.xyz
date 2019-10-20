@@ -3,15 +3,15 @@ html(lang="en")
 include ../mixins/head.pug
 +head('APFS - Minecraft Server')
 
-body(class="bg-light")
+body(style="background-image: url(\"/img/light/bg.png\")")
 
-include ../mixins/navbar.pug
+include ../mixins/light/navbar.pug
 +navbar('mc')
 
 //- Container div with horizontally centered content
 div(class="container d-flex align-items-center flex-column")
   h3 My Minecraft Server
-  p I run a minecraft server, and it's yours as much as it is mine. It currently has a robust multiverse system (multiple worlds) and big plans for a bunch of fun worlds in the future. We already have a survival world, with plans for two more on the way. Open to anyone interested, just join using the IP <code class="text-white">mc.apfs.xyz</code>
+  p An important part of APFS is the APFS Minecraft server, which is open for the public now with a major update planned for this December. The server currently has a robust multiverse system (multiple worlds) and big plans for a bunch of fun worlds in the future. We already have a survival world, with plans for two more on the way. Open to anyone interested, feel free to join at <code class="text-success">mc.apfs.xyz</code>
   | If you aren't convinced yet, have a look at some screenshots...
   //- Carousel of MC Screenshots
   div(class="carousel slide" id="screenshotCarousel")
@@ -35,4 +35,4 @@ div(class="container d-flex align-items-center flex-column")
       interval: 3000
     });
   
-  p(style="margin-top: 2rem;") NOTE: If you have any ideas for this server (or just general feedback or constructive criticism), feel free to let me know at <a href="mailto:amused@apfs.xyz" class="text-light">amused@apfs.xyz</a>
+  p(style="margin-top: 2rem;") NOTE: If you have any ideas for this server (or general feedback/constructive criticism), feel free to let me know at <a href="mailto:amused@apfs.xyz" class="text-success">amused@apfs.xyz</a>
