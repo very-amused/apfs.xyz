@@ -1,5 +1,28 @@
 const form = document.forms.uploadForm;
 const progressBar = $('#progressBar');
+
+$('#fileUpload').on('change', (evt) => {
+    const file = evt.target.files[0];
+    const filenameDisplay = $('#filename');
+    const submitButton = $('#submitButton');
+
+    // Make the filename display visible
+    filenameDisplay.removeClass('d-none');
+    // Check file size and disable the upload button if it's above 50MB
+    if (file.size >= (50 * 1024 * 1024)) {
+        filenameDisplay.text('This file is too large');
+        submitButton.removeClass('btn-success').addClass('btn-dark').attr('disabled', true);
+    }
+    else {
+        // Re-enable the upload button if it was previously disabled
+        if (submitButton.attr('disabled')) {
+            submitButton.removeAttr('disabled').removeClass('btn-dark').addClass('btn-success');
+        }
+        // Set the text to the file's name
+        filenameDisplay.text(file.name);
+    }
+});
+
 form.onsubmit = () => {
     const formData = new FormData(form);
 
@@ -26,20 +49,28 @@ form.onsubmit = () => {
         if (xhr.status !== 200) {
             /* If the server sent back an error message, alert the client using that,
             else check if the xhr has a status message. If neither messages are available, use a generic error message */
-            const error = xhr.response.error ? `Error: ${xhr.response.error}` : xhr.statusText ? xhr.statusText : 'An unspecified error has occured';
+            let error;
+            if (xhr.response) {
+                error = xhr.response.error;
+            }
+            else {
+                error = xhr.statusText ? xhr.statusText : 'An unspecified error has occured';
+            }
             alert(error);
+            return true;
+        }
+        else {
+            return false;
         }
     }
 
-    // Check for errors once response headers are available
-    xhr.onload = () => {
-        errorCheck();
-    };
 
     // Function called when the upload finishes
     xhr.onloadend = () => {
-        // Check for errors once again
-        errorCheck();
+        // Check for errors
+        if (errorCheck()) {
+            return;
+        }
 
         // Stop the progress bar animation and set its text to 'finished'
         progressBar.removeClass('progress-bar-animated');

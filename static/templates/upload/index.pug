@@ -30,7 +30,7 @@ div(class="container d-flex align-items-center flex-column")
           div(id="progressBarContainer" class="progress d-none mb-2")
             div(id="progressBar" class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar")
           //- Submit button
-          input(class="btn btn-sm btn-success" type="submit" value="Upload")
+          input(id="submitButton" class="btn btn-sm btn-success" type="submit" value="Upload")
           //- Display the file upload location
           span(id="successMessage" class="d-none text-center")
     //- Subcontainer for info
@@ -45,7 +45,5 @@ div(class="container d-flex align-items-center flex-column")
         <li>The ability to upload files and encrypt them using your APFS account password (which is stored securely).</li>
         </ul>
 
-//- Import filename display function
-script(src="/js/displayFilename.js")
-//- Import ajax upload function
+//- Import filename display and ajax upload function
 script(src="/js/upload.js")
