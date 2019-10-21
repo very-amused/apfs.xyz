@@ -14,16 +14,16 @@ div(class="container d-flex align-items-center flex-column")
   p An important part of APFS is the APFS Minecraft server, which is open for the public now with a major update planned for this December. The server currently has a robust multiverse system (multiple worlds) and big plans for a bunch of fun worlds in the future. We already have a survival world, with plans for two more on the way. Open to anyone interested, feel free to join at <code class="text-success">mc.apfs.xyz</code>
   | If you aren't convinced yet, have a look at some screenshots...
   //- Carousel of MC Screenshots
-  div(class="carousel slide" id="screenshotCarousel")
+  div(class="carousel slide" id="screenshotCarousel" style="width: 1024px;")
     div(class="carousel-inner")
       //- Iteration for screenshots 1-13
       each val in [...Array(13).keys()].map(i => i + 1)
         if val === 1
           div(class="carousel-item active")
-            img(class="d-block img-fluid" src="/img/mc/resized/screenshot_" + val + ".png")
+            img(class="d-block w-100" src="/img/mc/resized/screenshot_" + val + ".png")
         else
           div(class="carousel-item")
-            img(class="d-block img-fluid" src="/img/mc/resized/screenshot_" + val + ".png")
+            img(class="d-block w-100" src="/img/mc/resized/screenshot_" + val + ".png")
     //- Carousel controls
     a(class="carousel-control-prev" href="#screenshotCarousel" role="button" data-slide="prev")
       span(class="carousel-control-prev-icon")
@@ -31,8 +31,10 @@ div(class="container d-flex align-items-center flex-column")
       span(class="carousel-control-next-icon")
   //- Start the carousel with a 3 second time between changing slides
   script.
-    $('.carousel').carousel({
-      interval: 3000
+    $(document).ready(() => {
+      $('.carousel').carousel({
+        interval: 3000
+      });
     });
   
   p(style="margin-top: 2rem;") NOTE: If you have any ideas for this server (or general feedback/constructive criticism), feel free to let me know at <a href="mailto:amused@apfs.xyz" class="text-success">amused@apfs.xyz</a>
