@@ -1,6 +1,6 @@
 // Initialize Express
-import {Router, urlencoded} from 'express';
-const router = Router();
+import * as express from 'express';
+const router = express.Router();
 
 // Import the node fs module for scanning directories
 import {readdirSync} from 'fs';
@@ -67,7 +67,7 @@ const upload = multer({
 }).single('file');
 
 // Parse urlencoded HTTP form data
-router.use(urlencoded({extended: false}));
+router.use(express.urlencoded({extended: false}));
 
 router.post('/', (req, res) => {
     upload(req, res, (err) => {
