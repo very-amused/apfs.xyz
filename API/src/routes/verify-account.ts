@@ -1,5 +1,7 @@
 // Initialize Express Router
 import * as express from 'express';
+// eslint-disable-next-line no-unused-vars
+import {Pool} from 'mariadb';
 const router = express.Router();
 
 // Function to select a column from an SQL table and convert it to an array
@@ -12,7 +14,7 @@ async function selectAsArray(column: string, table: string, conn: any) {
     return dataArray;
 }
 
-async function main(pool: any, userID: string, token: string) {
+async function main(pool: Pool, userID: string, token: string) {
     const conn = await pool.getConnection();
 
     // Throw error if there is no token supplied

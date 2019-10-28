@@ -1,9 +1,6 @@
 // Initialize Express Router
 import * as express from 'express';
 const router = express.Router();
-// Parse urlencoded web form data
-router.use(express.urlencoded({extended: false}));
-
 // Import bcrypt for hashing
 import * as bcrypt from 'bcrypt';
 
@@ -64,6 +61,7 @@ async function main(pool: any, email: string, password: string) {
     // Throw an error if the user already exists
     const users = await selectAsArray('Email', 'Users', conn);
     if (users.includes(email)) {
+        conn.end(); // End the database connection before throwing an error
         throw `A user with the email address of ${email} already exists`;
     }
 
@@ -104,14 +102,19 @@ async function main(pool: any, email: string, password: string) {
     conn.end();
 }
 
-router.post('/', (req, res) => {
+// Parse urlencoded web form data with built-in express middleware
+router.post('/', express.json(), (req, res) => {
     // Insert user info into the db
     main(req.app.locals.pool, req.body.email, req.body.password)
     .then(() => {
-        res.render('accounts/create-account/success', {email: req.body.email}); // Render success template
+        res.status(200).json({
+            success: true
+        });
     },
     (err) => {
-        res.render('accounts/create-account/error', {err: err}); // Render error page if an error occurs
+        res.status(500).json({
+            error: err.toString()
+        });
     });
 });
 

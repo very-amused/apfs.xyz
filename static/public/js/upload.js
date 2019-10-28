@@ -64,7 +64,6 @@ form.onsubmit = () => {
         }
     }
 
-
     // Function called when the upload finishes
     xhr.onloadend = () => {
         // Check for errors
