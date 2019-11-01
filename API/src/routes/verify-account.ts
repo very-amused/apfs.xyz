@@ -19,12 +19,14 @@ async function main(pool: Pool, userID: string, token: string) {
 
     // Throw error if there is no token supplied
     if (!token) {
+        conn.end();
         throw 'A token must be supplied';
     }
 
     // Throw an error if the user ID doesn't belong to a user awaiting verification
     const userIDs = await selectAsArray('ID', 'Tokens', conn);
     if (!userIDs.includes(userID)) {
+        conn.end();
         throw `${userID} is not the ID of a user awaiting verification.`;
     }
 
@@ -33,6 +35,7 @@ async function main(pool: Pool, userID: string, token: string) {
     [userID]);
     const validToken: string = validTokenData[0].Token;
     if (token !== validToken) {
+        conn.end();
         throw 'Authentication failure due to an invalid token.';
     }
     else {
@@ -41,6 +44,7 @@ async function main(pool: Pool, userID: string, token: string) {
         [userID]);
         conn.query('UPDATE Users SET Verified = 1 WHERE ID = ?',
         [userID]);
+        conn.end();
     }
 }
 
