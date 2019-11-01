@@ -52,10 +52,10 @@ router.get('/', (req, res) => {
     res.send('ERROR: A user ID and token must be supplied');
 });
 
-router.get('/:userID', (req, res) => {
-    main(req.app.locals.pool, req.params.userID, req.query.token)
+router.get('/:userID/:token', (req, res) => {
+    main(req.app.locals.pool, req.params.userID, req.params.token)
     .then(() => {
-        res.redirect('/accounts/account-verified?success=true');
+        res.status(200).send('Your APFS account has been successfully verified');
     },
     (err) => {
         res.send(`ERROR: ${err}`);

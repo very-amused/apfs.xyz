@@ -51,7 +51,7 @@ async function sendVerificationEmail(ID: string, token: string, email: string) {
         to: email,
         subject: 'Verify apfs account',
         text: `Follow this link to verify your account:
-        https://apfs.xyz/API/verify-account/${ID}?token=${token}`
+        https://apfs.xyz/API/verify-account/${ID}/${token}`
     });
 }
 
