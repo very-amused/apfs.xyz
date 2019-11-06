@@ -5,23 +5,26 @@ include ../../mixins/head.pug
 
 body(style="background-image: url(\"/img/light/bg.png\")")
 
-include ../../mixins/light/navbar.pug
+include ../../mixins/navbar.pug
 +navbar()
 
 //- Container div with horizontally centered content
 div(class="container d-flex align-items-center flex-column")
   if (success === 'true')
-    h1(class="display-4 mt-3") Account verification succeeded
+    h1(class="display-4 mt-3 text") Account verification succeeded
   else
-    h1(class="display-4 mt-3") Account verification failed
+    h1(class="display-4 mt-3 text") Account verification failed
   //- Box containing content
-  div(class="container d-flex align-items-center flex-column border rounded bg-light shadow mt-3" style="width: 75%; height: 10rem;")
+  div(class="container d-flex align-items-center flex-column rounded bg shadow mt-3" style="width: 75%; height: 10rem;")
     if (success === 'true')
       p(class="mt-4 text-success") Your account has been successfully verified. You will soon be able to login (once that system is written).
       a(class="btn btn-lg btn-success text-white" href="/") Click here to go home
     else if (error)
-      p(class="mt-4") Your account verification has failed. See the error encountered below:
+      p(class="mt-4 text") Your account verification has failed. See the error encountered below:
       code(class="text-danger") #{error}
     else
-      p(class="mt-4") An unspecified error has occured.
+      p(class="mt-4 text") An unspecified error has occured.
 
+//- Theme switch
+include ../../mixins/themeSwitch.pug
++themeSwitch()

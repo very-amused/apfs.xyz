@@ -5,27 +5,27 @@ include ../../mixins/head.pug
 
 body(style="background-image: url(\"/img/light/bg.png\")")
 
-include ../../mixins/light/navbar.pug
+include ../../mixins/navbar.pug
 +navbar()
 
 //- Container div with horizontally centered content
 div(class="container d-flex align-items-center flex-column")
-  h1(class="display-4 mt-3") Create an Account
+  h1(class="display-4 mt-3 text") Create an Account
   //- Box containing login form
-  div(class="container-fluid d-flex justify-content-center flex-column border rounded bg-light shadow mt-3" style="width: 45%; height: 35rem;")
+  div(class="container-fluid d-flex justify-content-center flex-column rounded bg shadow mt-3" style="width: 45%; height: 35rem;")
     //- Alert (hidden by default)
     div(id="errorAlert" class="alert alert-danger alert-dismissible fade show d-none" role="alert")
     //- Account creation form
     form(id="accountForm" class="d-flex align-items-center flex-column" method="POST")
       div(class="form-group")
-        label(for="email") Email address:
+        label(class="text" for="email") Email address:
         //- Name attribute is used to refer to the input data after submission
         input(class="form-control" name="email" id="email" type="email" required)
       div(class="form-group")
-        label(for="password") Password:
+        label(class="text" for="password") Password:
         input(class="form-control" name="password" id="password" type="password" required)
       div(class="form-group")
-        label(for="passwordConfirmation") Confirm password:
+        label(class="text" for="passwordConfirmation") Confirm password:
         input(class="form-control" name="passwordConfirmation" id="passwordConfirmation" type="password" required)
       button(type="submit" class="btn btn-success btn-lg") Submit
     div(id="successAlert" class="alert alert-success mt-3 d-none" role="alert")
@@ -33,3 +33,7 @@ div(class="container d-flex align-items-center flex-column")
 
 //- Frontend JS code
 script(src="/js/create-account.js")
+
+//- Theme switch
+include ../../mixins/themeSwitch.pug
++themeSwitch()

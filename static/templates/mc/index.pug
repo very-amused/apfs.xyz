@@ -5,14 +5,14 @@ include ../mixins/head.pug
 
 body(style="background-image: url(\"/img/light/bg.png\")")
 
-include ../mixins/light/navbar.pug
+include ../mixins/navbar.pug
 +navbar('mc')
 
 //- Container div with horizontally centered content
 div(class="container d-flex align-items-center flex-column")
-  h3 My Minecraft Server
-  p An important part of APFS is the APFS Minecraft server, which is open for the public now with a major update planned for this December. The server currently has a robust multiverse system (multiple worlds) and big plans for a bunch of fun worlds in the future. We already have a survival world, with plans for two more on the way. Open to anyone interested, feel free to join at <code class="text-success">mc.apfs.xyz</code>
-  | If you aren't convinced yet, have a look at some screenshots...
+  h1(class="display-4 text") My Minecraft Server
+  p(class="text") An important part of APFS is the APFS Minecraft server, which is open for the public now with a major update planned for this December. The server currently has a robust multiverse system (multiple worlds) and big plans for a bunch of fun worlds in the future. We already have a survival world, with plans for two more on the way. Open to anyone interested, feel free to join at <code class="text-success">mc.apfs.xyz</code>
+  p(class="text") If you aren't convinced yet, have a look at some screenshots...
   //- Carousel of MC Screenshots
   div(class="carousel slide" id="screenshotCarousel" style="width: 1024px;")
     div(class="carousel-inner")
@@ -37,4 +37,8 @@ div(class="container d-flex align-items-center flex-column")
       });
     });
   
-  p(style="margin-top: 2rem;") NOTE: If you have any ideas for this server (or general feedback/constructive criticism), feel free to let me know at <a href="mailto:amused@apfs.xyz" class="text-success">amused@apfs.xyz</a>
+  p(class="mt-3 text") NOTE: If you have any ideas for this server (or general feedback/constructive criticism), feel free to let me know at <a href="mailto:amused@apfs.xyz" class="text-success">amused@apfs.xyz</a>
+
+//- Theme switch
+include ../mixins/themeSwitch.pug
++themeSwitch()
