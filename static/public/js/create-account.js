@@ -60,6 +60,7 @@ async function submit(email, password) {
     if (!$('#errorAlert').hasClass('d-none')) {
         $('#errorAlert').addClass('d-none');
     }
+    // Show success message
     $('#successAlert').removeClass('d-none');
     $('#successAlert').html(successHTML);
 }
