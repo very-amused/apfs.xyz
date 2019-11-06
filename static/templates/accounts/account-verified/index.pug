@@ -15,9 +15,10 @@ div(class="container d-flex align-items-center flex-column")
   else
     h1(class="display-4 mt-3") Account verification failed
   //- Box containing content
-  div(class="container d-flex align-items-center flex-column border rounded bg-light shadow mt-3" style="width: 75%; height: 35rem;")
+  div(class="container d-flex align-items-center flex-column border rounded bg-light shadow mt-3" style="width: 75%; height: 10rem;")
     if (success === 'true')
-      p(class="mt-4") Your account has been successfully verified. You will soon be able to login (once that system is written).
+      p(class="mt-4 text-success") Your account has been successfully verified. You will soon be able to login (once that system is written).
+      a(class="btn btn-lg btn-success text-white" href="/") Click here to go home
     else if (error)
       p(class="mt-4") Your account verification has failed. See the error encountered below:
       code(class="text-danger") #{error}

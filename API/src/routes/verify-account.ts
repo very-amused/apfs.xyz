@@ -17,10 +17,14 @@ async function selectAsArray(column: string, table: string, conn: any) {
 async function main(pool: Pool, userID: string, token: string) {
     const conn = await pool.getConnection();
 
-    // Throw error if there is no token supplied
-    if (!token) {
+    // Validate that a 10-digit UID and a 20-char token are supplied
+    if (!userID || userID.length !== 10) {
         conn.end();
-        throw 'A token must be supplied';
+        throw 'A 10-digit user ID must be supplied';
+    }
+    else if (!token || token.length !== 20) {
+        conn.end();
+        throw 'A 20-character token must be supplied';
     }
 
     // Throw an error if the user ID doesn't belong to a user awaiting verification
@@ -36,7 +40,7 @@ async function main(pool: Pool, userID: string, token: string) {
     const validToken: string = validTokenData[0].Token;
     if (token !== validToken) {
         conn.end();
-        throw 'Authentication failure due to an invalid token.';
+        throw 'Authentication failure due to invalid token.';
     }
     else {
         // Verify the user because the token is valid
@@ -48,18 +52,15 @@ async function main(pool: Pool, userID: string, token: string) {
     }
 }
 
-router.get('/', (req, res) => {
-    res.send('ERROR: A user ID and token must be supplied');
-});
-
-router.get('/:userID/:token', (req, res) => {
+router.get('/:userID?/:token?', (req, res) => {
     main(req.app.locals.pool, req.params.userID, req.params.token)
     .then(() => {
-        res.status(200).send('Your APFS account has been successfully verified');
+        res.status(200).redirect('/accounts/account-verified?success=true');
     },
     (err) => {
-        res.send(`ERROR: ${err}`);
+        res.status(500).redirect(`/accounts/account-verified?success=false&error=${err}`);
     });
 });
+
 
 module.exports = router;

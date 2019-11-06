@@ -42,11 +42,6 @@ async function scanDirRecursive(dirPath: string, webPath = '/') {
             app.get(webPath, (req, res) => {
                 // Check if there are query parameters passed to the page
                 if (!isEmpty(req.query)) {
-                    // Convert query params to lowercase
-                    for (const i in req.query) {
-                        req.query[i] = req.query[i].toLowerCase();
-                    }
-
                     // Pass query params to pug
                     res.render(renderPath, req.query);
                 }
