@@ -1,6 +1,6 @@
 mixin navbar(activeItem)
   //- Navigation bar
-  nav(class="navbar navbar-expand navbar-light" style="background: #D3D3D3")
+  nav(class="navbar navbar-expand")
     //- Navbar icon
     a(class="navbar-brand" href="/")
       img(src="/img/favicon.png" width="38" height="38")
@@ -15,8 +15,8 @@ mixin navbar(activeItem)
       //- Dropdown menu
       div(class="nav-item dropdown")
         button(class="btn btn-success dropdown-toggle" type="button" id="accountsDropdown" data-toggle="dropdown") Accounts
-        div(class="dropdown-menu dropdown-menu-right")
-          a(class="dropdown-item" href="/accounts/create-account") Create an account
+        div(class="dropdown-menu bg dropdown-menu-right")
+          a(class="dropdown-item text" href="/accounts/create-account") Create an account
           a(class="dropdown-item disabled" href="/accounts/login") Login
   //- Add the active class to whichever item is specified
   script.

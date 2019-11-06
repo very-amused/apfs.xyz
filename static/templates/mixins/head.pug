@@ -6,8 +6,12 @@ mixin head(title="Amused Personal File Server")
     meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
     //- Include Bootstrap and custom css
     link(rel="stylesheet" href="https://apfs.xyz/css/bootstrap.min.css")
+    //- Include FontAwesome css
+    link(rel="stylesheet" href="/css/fontawesome.css")
     //- Include Bootstrap bundle (which also includes popper.js) and JQuery slim
     script(src="https://apfs.xyz/js/jquery.slim.min.js")
     script(src="https://apfs.xyz/js/bootstrap.bundle.min.js")
+    //- Include theme setting/switching frontend code
+    script(src="/js/themeSwitch.js")
     //- Favicon
     link(rel="shortcut icon" type="image/png" href="/img/favicon.png")

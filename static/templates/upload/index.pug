@@ -3,20 +3,19 @@ html(lang="en")
 include ../mixins/head.pug
 +head("APFS - Upload")
 
-body(style="background-image: url(\"/img/light/bg.png\")")
+body
 
-
-include ../mixins/light/navbar.pug
+include ../mixins/navbar.pug
 +navbar("upload")
 
 //- Container div with horizontally centered content
 div(class="container d-flex align-items-center flex-column")
   //- Upload header
-  h1(class="display-4 mt-3") Upload Files Here
+  h1(class="display-4 mt-3 text") Upload Files Here
   //- Box containing upload controls and info
-  div(class="container d-flex justify-content-center flex-row border rounded bg-light shadow mt-3" style="width: 90%; height: 35rem;")
+  div(class="container d-flex justify-content-center flex-row rounded bg shadow mt-3" style="width: 90%; height: 35rem;")
     //- Subcontainer for upload controls
-    div(class="container d-flex align-items-center flex-column w-50 border-right")
+    div(class="container d-flex align-items-center flex-column w-50 border-right border-success")
       //- Upload form
       form(id="uploadForm" class="mt-4 w-75" action="/API/upload" method="POST" enctype="multipart/form-data")
         div(class="form-group d-flex justify-content-center flex-column")
@@ -34,8 +33,8 @@ div(class="container d-flex align-items-center flex-column")
           //- Display the file upload location
           span(id="successMessage" class="d-none text-center")
     //- Subcontainer for info
-    div(class="container w-50 border-left")
-      p(class="text-break mt-4").
+    div(class="container w-50 border-left border-success")
+      p(class="text-break mt-4 text").
         This upload page allows you to share files with friends, quickly transfer them between devices, or any other purposes that you can think of. Once a file is uploaded here, you'll be able to track the progress as it uploads, and when it finishes you'll be given a URL where your file can be reached from anywhere in the world.
         <br><br>
         Features coming to the upload page in the future include:
@@ -47,3 +46,7 @@ div(class="container d-flex align-items-center flex-column")
 
 //- Import filename display and ajax upload function
 script(src="/js/upload.js")
+
+//- Theme switch
+include ../mixins/themeSwitch.pug
++themeSwitch()
