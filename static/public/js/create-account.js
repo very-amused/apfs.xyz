@@ -56,6 +56,10 @@ async function submit(email, password) {
     let successHTML = await fetch('/html/accounts/create-account/success.html');
     successHTML = await successHTML.text();
     successHTML = await successHTML.replace('#{email}', email);
+    // Clear error message if it's showing
+    if (!$('#errorAlert').hasClass('d-none')) {
+        $('#errorAlert').addClass('d-none');
+    }
     $('#successAlert').removeClass('d-none');
     $('#successAlert').html(successHTML);
 }
