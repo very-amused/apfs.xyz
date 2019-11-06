@@ -16,6 +16,16 @@ import * as util from 'util';
 const readdirPromise = util.promisify(fs.readdir);
 const statPromise = util.promisify(fs.stat);
 
+// Function to check if an object is empty (this yields better performance than the Object.keys().length method)
+function isEmpty(obj: object) {
+    for (const i in obj) {
+        if (obj.hasOwnProperty(i)) {
+            return false;
+        }
+    }
+    return true;
+}
+
 async function scanDirRecursive(dirPath: string, webPath = '/') {
     // Make sure a file path is supplied
     if (!dirPath) {
@@ -26,8 +36,23 @@ async function scanDirRecursive(dirPath: string, webPath = '/') {
     for (const file of files) {
         // Render the file if it's named 'index.pug'
         if (file === 'index.pug') {
+            // Store render path
+            const renderPath = `${__dirname}/${dirPath}/${file}`;
+
             app.get(webPath, (req, res) => {
-                res.render(`${__dirname}/${dirPath}/${file}`);
+                // Check if there are query parameters passed to the page
+                if (!isEmpty(req.query)) {
+                    // Convert query params to lowercase
+                    for (const i in req.query) {
+                        req.query[i] = req.query[i].toLowerCase();
+                    }
+
+                    // Pass query params to pug
+                    res.render(renderPath, req.query);
+                }
+                else {
+                    res.render(renderPath);
+                }
             });
         }
         else {
