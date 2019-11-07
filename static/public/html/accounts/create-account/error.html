@@ -1,4 +1,11 @@
 <span>#{error}</span>
-<button class="close" data-dismiss="alert" type="button">
+<button id="alertDismiss" class="close" type="button">
     <span>&times;</span>
 </button>
+
+<script>
+    // Clear and hide the error alert when the close button is clicked
+    document.getElementById('alertDismiss').onclick = () => {
+        $('#errorAlert').empty().addClass('d-none');
+    };
+</script>

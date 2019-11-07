@@ -14,7 +14,7 @@ div(class="container d-flex align-items-center flex-column")
   //- Box containing login form
   div(class="container-fluid d-flex justify-content-center flex-column rounded bg shadow mt-3" style="width: 45%; height: 35rem;")
     //- Alert (hidden by default)
-    div(id="errorAlert" class="alert alert-danger alert-dismissible fade show d-none" role="alert")
+    div(id="errorAlert" class="alert alert-danger alert-dismissible fade show m-3 d-none" role="alert")
     //- Account creation form
     form(id="accountForm" class="d-flex align-items-center flex-column" method="POST")
       div(class="form-group")
@@ -28,7 +28,8 @@ div(class="container d-flex align-items-center flex-column")
         label(class="text" for="passwordConfirmation") Confirm password:
         input(class="form-control" name="passwordConfirmation" id="passwordConfirmation" type="password" required)
       button(type="submit" class="btn btn-success btn-lg") Submit
-    div(id="successAlert" class="alert alert-success mt-3 d-none" role="alert")
+    //- Success message
+    div(id="successAlert" class="alert alert-success m-3 d-none" role="alert")
       //- TODO: Add information about what accounts can be used for to the right of the creation form
 
 //- Frontend JS code
