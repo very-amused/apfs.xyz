@@ -33,7 +33,7 @@ class User {
     }
 
     // Method called to create the user's account
-    async setup() {
+    public async setup() {
         // Connect to db
         await this.connect();
         // Verify that user email is unique
